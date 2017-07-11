@@ -5,6 +5,8 @@ import './libs/echarts-liquidfill.min';
 import './libs/echarts-wordcloud.min';
 import './libs/dark';
 import './style.css!';
+import './libs/bmap.js';
+import './libs/getBmap.js';
 
 export class EchartsCtrl extends MetricsPanelCtrl {
 
@@ -88,13 +90,8 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 System.import(this.getPanelPath() + 'libs/beijing.js');
                 break;
             // case '百度地图':
-            // System.import('http://gallery.echartsjs.com/dep/echarts/latest/extension/bmap.min.js');
-            // System.import('http://api.map.baidu.com/getscript?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM&services=&t=20170703123905');
-            // document.body.innerHTML+='<script src="http://gallery.echartsjs.com/dep/echarts/latest/extension/bmap.min.js"><script/>';
-            // (function(){
-            //     window.BMap_loadScriptTime = (new Date()).getTime();
-            //     document.body.innerHTML += '<script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM&services=&t=20170705114645"></script>';
-            // })();
+            //     System.import(this.getPanelPath() + 'libs/bmap.js');
+            //     System.import(this.getPanelPath() + 'libs/getBmap.js');
             // break;
             default:
                 break;
