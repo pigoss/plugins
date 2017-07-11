@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/module.js"],"names":["ListCtrl"],"mappings":";;;;;;;;AAAQA,c,cAAAA,Q;;;2BAGNA,Q","file":"module.js","sourcesContent":["import {ListCtrl} from './list_ctrl';\n\nexport {\n  ListCtrl as PanelCtrl\n};\n"]}

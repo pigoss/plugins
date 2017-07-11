@@ -1,0 +1,115 @@
+<div class="edit-tab-with-sidemenu">
+  <aside class="edit-sidemenu-aside">
+    <ul class="edit-sidemenu">
+      <li ng-repeat="style in editor.panel.styles" ng-class="{active: editor.activeStyleIndex === $index}">
+        <a ng-click="editor.activeStyleIndex = $index">{{style.pattern || 'New rule'}}</a>
+      </li>
+      <li>
+        <a class="pointer" ng-click="editor.addColumnStyle()">
+          <i class="fa fa-plus"></i>&nbsp;新样式
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="edit-tab-content" ng-repeat="style in editor.panel.styles" ng-if="editor.activeStyleIndex === $index">
+
+    <div class="section gf-form-group">
+      <h5 class="section-heading">样式配置</h5>
+      <div class="gf-form-inline">
+        <div class="gf-form">
+          <label class="gf-form-label width-8">列名</label>
+          <input type="text" placeholder="Name or regex" class="gf-form-input width-15" ng-model="style.pattern" bs-tooltip="'可指定正则表达式,如:/my.*regex/'" bs-typeahead="editor.getColumnNames" ng-blur="editor.render()" data-min-length=0 data-items=100 ng-model-onblur data-placement="right">
+        </div>
+      </div>
+      <div class="gf-form" ng-if="style.type !== 'hidden'">
+        <label class="gf-form-label width-8">列别名</label>
+        <input type="text" class="gf-form-input width-15" ng-model="style.alias" ng-change="editor.render()" ng-model-onblur placeholder="新的列标题">
+      </div>
+      <div class="gf-form" ng-if="style.type !== 'hidden'">
+        <label class="gf-form-label width-8">标题颜色</label>
+        <span class="gf-form-label">
+          <spectrum-picker ng-model="style.headerColor" ng-change="editor.render()"></spectrum-picker>
+        </span>
+        <input type="text" class="gf-form-input width-12" ng-model="style.headerColor" placeholder="50,80" ng-change="editor.render()" ng-model-onblur>
+      </div>
+    </div>
+
+    <div class="section gf-form-group">
+      <h5 class="section-heading">样式类型</h5>
+
+      <div class="gf-form">
+        <label class="gf-form-label width-8">类型</label>
+        <div class="gf-form-select-wrapper width-10">
+          <select class="gf-form-input" ng-model="style.type" ng-options="c.value as c.text for c in editor.columnTypes" ng-change="editor.render()"></select>
+        </div>
+      </div>
+      <div class="gf-form" ng-if="style.type === 'date'">
+        <label class="gf-form-label width-8">日期格式</label>
+        <metric-segment-model property="style.dateFormat" options="editor.dateFormats" on-change="editor.render()" custom="true"></metric-segment-model>
+      </div>
+
+      <div ng-if="style.type === 'string'">
+        <gf-form-switch class="gf-form" label-class="width-8" ng-if="style.type === 'string'" label="过滤HTML" checked="style.sanitize"
+          change="editor.render()"></gf-form-switch>
+      </div>
+
+      <div ng-if="style.type === 'number'">
+        <div class="gf-form">
+          <label class="gf-form-label width-8">单位</label>
+          <div class="gf-form-dropdown-typeahead width-10" ng-model="style.unit" dropdown-typeahead2="editor.unitFormats" dropdown-typeahead-on-select="editor.setUnitFormat(style, $subItem)"></div>
+        </div>
+        <div class="gf-form">
+          <label class="gf-form-label width-8">小数位</label>
+          <input type="number" class="gf-form-input width-4" data-placement="right" ng-model="style.decimals" ng-change="editor.render()" ng-model-onblur>
+        </div>
+      </div>
+    </div>
+
+    <div class="section gf-form-group" ng-if="style.type === 'number'">
+      <h5 class="section-heading">阈值</h5>
+      <div class="gf-form">
+        <label class="gf-form-label width-8">阈值<tip>以逗号分隔</tip></label>
+        <input type="text" class="gf-form-input width-15" ng-model="style.thresholds" placeholder="50,80" ng-blur="editor.render()" array-join ng-model-onblur>
+      </div>
+      <div class="gf-form">
+        <label class="gf-form-label width-8">渲染模式</label>
+        <div class="gf-form-select-wrapper width-15">
+          <select class="gf-form-input" ng-model="style.colorMode" ng-options="c.value as c.text for c in editor.colorModes" ng-change="editor.render()"></select>
+        </div>
+      </div>
+      <div class="gf-form">
+        <label class="gf-form-label width-8">颜色</label>
+        <span class="gf-form-label">
+          <spectrum-picker ng-model="style.colors[0]" ng-change="editor.render()"></spectrum-picker>
+        </span>
+        <input type="text" class="gf-form-input width-12" ng-model="style.colors[0]" placeholder="50,80" ng-blur="editor.render()" ng-model-onblur>
+        <div class="gf-form-label">
+          <a class="pointer" ng-click="editor.invertColorOrder($index)">颠倒</a>
+        </div>
+      </div>
+      <div class="gf-form">
+        <span class="offset-width-8"></span>
+        <span class="gf-form-label">
+          <spectrum-picker ng-model="style.colors[1]" ng-change="editor.render()"></spectrum-picker>
+        </span>
+        <input type="text" class="gf-form-input width-12" ng-model="style.colors[1]" placeholder="50,80" ng-blur="editor.render()" ng-model-onblur>
+      </div>
+      <div class="gf-form">
+        <span class="offset-width-8"></span>
+        <span class="gf-form-label">
+          <spectrum-picker ng-model="style.colors[2]" ng-change="editor.render()"></spectrum-picker>
+        </span>
+        <input type="text" class="gf-form-input width-12" ng-model="style.colors[2]" placeholder="50,80" ng-blur="editor.render()" ng-model-onblur>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-danger btn-small" ng-click="editor.removeColumnStyle(style)">
+      <i class="fa fa-trash"></i> 移除样式
+    </button>
+    <br />
+    <br />
+
+  </div>

@@ -1,0 +1,20 @@
+{
+  "type": "panel",
+  "name": "List",
+  "id": "grafana-list-panel",
+
+  "info": {
+    "description": "List Panel Plugin for Grafana",
+    "keywords": ["list", "panel"],
+    "links": [
+      {"name": "Project site", "url": "https://github.com/Billiballa/grafana-list-panel"}
+    ],
+    "version": "0.0.1",
+    "updated": "2017-04-25"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}

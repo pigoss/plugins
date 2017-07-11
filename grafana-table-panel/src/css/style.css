@@ -1,0 +1,71 @@
+.table-panel-container {
+    padding-top: 2.6em;
+    text-align: center;
+}
+
+.table-panel-header-bg {
+    margin: 0 8px;
+    padding: 0 12px;
+    height: 2.6em;
+    border: none;
+    background: #333;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.table-panel-scroll {
+    padding: 0px 20px;
+}
+
+.table-panel-table-header-inner {
+    position: static;
+    padding: .3em 1em;
+    line-height: 2;
+    text-align: center;
+}
+
+.table-panel-table td {
+    border-color: transparent;
+    padding: .3em 1em;
+    line-height: 2;
+    max-width: 12em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-panel-table tr:nth-child(even) {
+    background-color: #1b1919;
+}
+
+.table-panel-percentage {
+    width: 100%;
+    text-align: left;
+}
+
+.table-panel-bar {
+    display: inline-block;
+    margin: 0 12px;
+    border-radius: 4px;
+    height: 20px;
+    width: 6em;
+    overflow: hidden;
+    background: #333;
+    vertical-align: middle;
+}
+
+.table-panel-bar>span {
+    float: left;
+    display: block;
+    height: 20px;
+    background: rgb(45,148,215);
+}
+.state-point {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 8px;
+    border: 1px solid;
+    border-radius: 33%;
+    vertical-align: middle;
+}

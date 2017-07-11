@@ -1,0 +1,10 @@
+<div class="state-container">
+  <div class="state-list">
+    <div class="state-item" ng-repeat="item in ctrl.dataList">
+      <div class="state-text" ng-style="{background:item.bgColor}">
+        <!--<span class="state-point" ng-style="{color:item.stateColor}" ng-if="ctrl.panel.IS_POINT"></span>-->
+        {{item.name}}
+      </div>
+    </div>
+  </div>
+</div>

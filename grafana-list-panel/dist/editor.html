@@ -1,0 +1,51 @@
+<h3 class="page-heading">Options</h3>
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<gf-form-switch class="gf-form" label="Transverse" label-class="width-8" checked="ctrl.panel.IS_ROW" on-change="ctrl.render()"></gf-form-switch>
+	</div>
+</div>
+<h3 class="page-heading">Cards</h3>
+<div class="editor-row">
+	<div class="section gf-form-group" ng-repeat="card in ctrl.panel.cards" ng-init="outerIndex = $index">
+		<!--<h5 class="section-heading">Settings</h5>-->
+		<div class="gf-form">
+			<label class="gf-form-label width-5">Title</label>
+			<input type="text" class="input-small gf-form-input gf-form--group" placeholder="title" ng-model="card.title" ng-change="ctrl.render()" ng-model-onblur />
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-5">Theme</label>
+			<span class="gf-form-label">
+				<spectrum-picker ng-model="card.color" ng-change="ctrl.render()" ></spectrum-picker>
+			</span>
+			<input type="text" class="input-small gf-form-input gf-form--group" ng-model="card.color" ng-change="ctrl.render()" ng-model-onblur />
+			<label class="gf-form-label"><i class="fa fa-trash pointer" ng-click="ctrl.removeCard(card)"></i></label>				
+		</div>
+		<!--<div class="gf-form">
+			<label class="gf-form-label">Item Type</label>
+			<div class="gf-form-select-wrapper max-width-10">
+				<select class="input-medium gf-form-input" ng-model="card.type" ng-options='t for t in ["none", "disc", "circle", "square", "decimal", "lower-alpha", "upper-alpha", "lower-roman", "upper-roman", "decimal-leading-zero"]' ng-change="ctrl.render()"></select>
+			</div>
+		</div>-->
+		<!--<h5 class="section-heading">Items</h5>-->
+		<br>
+		<div class="gf-form" style="flex-wrap:wrap;" ng-repeat="item in card.items">
+			<label class="gf-form-label">Content</label>
+			<input type="text" class="input-small gf-form-input width-8" ng-model="item.value" ng-change="ctrl.render()" ng-model-onblur />
+			<label class="gf-form-label">Info</label>
+			<input type="text" class="input-small gf-form-input width-8" ng-model="item.info" ng-change="ctrl.render()" ng-model-onblur />
+			<span class="gf-form-label">
+				<i class="fa fa-remove pointer" ng-click="ctrl.removeItem(outerIndex,item)"></i>
+			</span>
+		</div>
+		<div class="gf-form">
+			<span class="gf-form-label">
+				<i class="fa fa-plus pointer" ng-click="ctrl.addItem($index)"></i>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="editor-row">
+	<div class="gf-form-button">
+		<button class="btn btn-inverse" ng-click="ctrl.addCard()"><i class="fa fa-plus"></i>&nbsp;Add Card</button>
+	</div>
+</div>

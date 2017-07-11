@@ -1,0 +1,67 @@
+<h3 class="page-heading"></h3>
+<div class="editor-row">
+    <div class="section gf-form-group">
+        <h5 class="section-heading">Data</h5>
+        <div class="gf-form-inline">
+            <div class="gf-form">
+                <label class="gf-form-label width-8">URL</label>
+                <input type="text" class="input-small gf-form-input width-30" ng-model="ctrl.panel.url" />
+            </div>
+        </div>
+        <div class="gf-form-inline">
+            <div class="gf-form">
+                <label class="gf-form-label width-8">Request</label>
+                <input type="text" class="input-small gf-form-input width-30" ng-model="ctrl.panel.request" />
+            </div>
+        </div>
+        <div class="gf-form-inline">
+            <div class="gf-form">
+                <label class="gf-form-label width-8">Interval</label>
+                <input type="number" class="input-small gf-form-input width-5" ng-model="ctrl.panel.updateInterval" placeholder="10000" />
+                <label class="gf-form-label width-3">ms</label>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="editor-row">
+	<div class="section gf-form-group">
+		<gf-form-switch class="gf-form" label="Transverse" label-class="width-8" checked="ctrl.panel.IS_ROW" on-change="ctrl.render()"></gf-form-switch>
+	</div>
+</div>
+<h3 class="page-heading">Cards</h3>
+<div class="editor-row">
+	<div class="section gf-form-group" ng-repeat="card in ctrl.panel.cards" ng-init="outerIndex = $index">
+		<div class="gf-form">
+			<label class="gf-form-label width-5">Title</label>
+			<input type="text" class="input-small gf-form-input gf-form--group" placeholder="title" ng-model="card.title" ng-change="ctrl.render()" ng-model-onblur />
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-5">Theme</label>
+			<span class="gf-form-label">
+				<spectrum-picker ng-model="card.color" ng-change="ctrl.render()" ></spectrum-picker>
+			</span>
+			<input type="text" class="input-small gf-form-input gf-form--group" ng-model="card.color" ng-change="ctrl.render()" ng-model-onblur />
+			<label class="gf-form-label"><i class="fa fa-trash pointer" ng-click="ctrl.removeCard(card)"></i></label>				
+		</div>
+		<br>
+		<div class="gf-form" style="flex-wrap:wrap;" ng-repeat="item in card.items">
+			<label class="gf-form-label">Content</label>
+			<input type="text" class="input-small gf-form-input width-8" ng-model="item.value" ng-change="ctrl.render()" ng-model-onblur />
+			<label class="gf-form-label">Info</label>
+			<input type="text" class="input-small gf-form-input width-8" ng-model="item.info" ng-change="ctrl.render()" ng-model-onblur />
+			<span class="gf-form-label">
+				<i class="fa fa-remove pointer" ng-click="ctrl.removeItem(outerIndex,item)"></i>
+			</span>
+		</div>
+		<div class="gf-form">
+			<span class="gf-form-label">
+				<i class="fa fa-plus pointer" ng-click="ctrl.addItem($index)"></i>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="editor-row">
+	<div class="gf-form-button">
+		<button class="btn btn-inverse" ng-click="ctrl.addCard()"><i class="fa fa-plus"></i>&nbsp;Add Card</button>
+	</div>
+</div>-->

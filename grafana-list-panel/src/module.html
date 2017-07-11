@@ -1,0 +1,15 @@
+<div class="list-container" ng-class="{true:'list-container-row',false:'list-container-col'}[ctrl.panel.IS_ROW]" ng-style="{height: ctrl.height}">
+  <div class="list-card" ng-repeat="card in ctrl.panel.cards">
+    <div class="list-header" ng-style="{backgroundColor:card.color};">
+      <span class="list-title">{{card.title}}</span>
+    </div>
+    <div class="list-body" ng-style="{'list-style-type': card.type};">
+      <div class="list-list">
+        <div class="list-item" ng-repeat="item in card.items">
+          <span class="list-content">{{item.value}}</span><br>
+          <span class="list-info">{{item.info}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
