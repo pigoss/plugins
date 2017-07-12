@@ -1,0 +1,13 @@
+<div class="alert-container" style="height:{{ctrl.height}}px">
+  <div class="alert-list">
+    <div class="alert-item" ng-repeat="item in ctrl.dataList">
+      <div class="alert-time">{{item.time}}</div>
+      <div class="alert-content">
+        <i class="alert-status" style="color:{{item.bgColor}}"></i>
+        <div class="alert-content-info" ng-repeat="info in item.info">
+          <span class="alert-content-name">{{info.name}}&nbsp:&nbsp</span><span class="alert-content-value">{{info.value}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

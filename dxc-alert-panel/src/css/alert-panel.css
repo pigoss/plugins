@@ -1,0 +1,84 @@
+.alert-container {
+  position: relative;
+  overflow-y: auto;
+}
+
+.alert-container .alert-list{
+  position: relative;
+}
+
+.alert-container .alert-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 7rem;
+  height: 100%;
+  width: 0.1rem;
+  background: linear-gradient(#ffd500 0,#f40 99%,#f40 100%);
+}
+
+.alert-container .alert-item{
+  position: relative;
+  padding: 0.5rem 0;
+  color: #D8D9DA;
+}
+
+.alert-container .alert-time{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 6rem;
+  color: #7B7B7B;
+  text-align: center;
+}
+.alert-container .alert-content{
+  position: relative;
+  margin: 0 .5rem 0 9rem;
+  padding: .5rem 1rem;
+  border-radius: 4px;
+  box-shadow: -1px -1px 0 0 rgba(255,255,255,.1), 1px 1px 0 0 rgba(0,0,0,.3);
+  background: linear-gradient(135deg,#2f2f2f,#262626);
+}
+
+.alert-container .alert-content::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -18px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-left: 10px solid orange;
+}
+
+.alert-container .alert-status{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 0px;
+  height: 0px;
+  border: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-top: 8px solid currentColor;
+  border-right: 8px solid currentColor;
+  border-top-right-radius: 4px;
+}
+
+.alert-container .alert-content-info{
+  /*border-right: 1px solid #333;*/
+  /*border-left: 1px solid #1f1d1d;*/
+  line-height: 2rem;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.alert-container .alert-content-name{
+  /*float: left;*/
+}
+
+.alert-container .alert-content-value{
+  /*float: left;*/
+}

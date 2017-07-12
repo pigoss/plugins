@@ -1,0 +1,17 @@
+{
+  "type": "panel",
+  "name": "告警",
+  "id": "dxc-alert-panel",
+
+  "info": {
+    "description": "Alert Panel Plugin for Grafana",
+    "keywords": ["alert", "panel"],
+    "version": "0.0.1",
+    "updated": "2017-07-12"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}
