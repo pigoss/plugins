@@ -65,7 +65,8 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
         // url: '',
         // request: '',
         // updateInterval: 10000,
-        bgColor: ["linear-gradient(to bottom right, #3abac7, #a375b6)", "linear-gradient(to bottom right, #fcd98d, #f3b65b)", "linear-gradient(to bottom right, #ffb88c, #e5658f)"
+        bgColor: ['linear-gradient(to bottom right, #3abac7, #a375b6)', 'linear-gradient(to bottom right, #fcd98d, #f3b65b)', 'linear-gradient(to bottom right, #ffb88c, #e5658f)'
+
         // ],
         // stateColor: [
         //   "linear-gradient(to bottom right, #4acda5, #3f74c6)",
@@ -95,34 +96,25 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
 
         _createClass(StateCtrl, [{
           key: 'onDataError',
-          value: function onDataError(err) {
-            this.dataList = data[0].dataList;
-            this.transform(this.dataList);
+          value: function onDataError() {
             this.render();
           }
         }, {
           key: 'onDataReceived',
           value: function onDataReceived(data) {
+            var datajson = [{ 'name': '兖矿电邮', 'state': '1' }, { 'name': '人力资源', 'state': '2' }, { 'name': '兖矿OA', 'state': '0' }, { 'name': '全面预算系统', 'state': '0' }, { 'name': '内部市场化系统', 'state': '0' }, { 'name': '呼叫中心', 'state': '0' }, { 'name': '地测部GIS', 'state': '0' }, { 'name': '基建PMIS', 'state': '0' }, { 'name': '安监局安全信息联网', 'state': '0' }, { 'name': '实时数据联网', 'state': '1' }, { 'name': '审计系统', 'state': '2' }, { 'name': '总院PACS', 'state': '1' }, { 'name': '煤业资金', 'state': '0' }, { 'name': '煤化工能源管控', 'state': '0' }, { 'name': '物资商城', 'state': '0' }, { 'name': '环保节能系统', 'state': '1' }, { 'name': '短信平台', 'state': '2' }, { 'name': '矿井微震联网系统', 'state': '0' }, { 'name': '纪委网上举报', 'state': '1' }, { 'name': '综合调度管理信息系统', 'state': '0' }, { 'name': '综合运营', 'state': '0' }, { 'name': '考勤', 'state': '0' }, { 'name': '矿井微震联网系统', 'state': '0' }, { 'name': '计划生育', 'state': '0' }, { 'name': '集团风险管理', 'state': '0' }];
+
             if (data[0]) {
               if (data[0].dataList) {
                 this.dataList = data[0].dataList;
               } else {
-                this.dataList = [{ "name": "网上银行", "state": "1" }, { "name": "ITSM运维", "state": "2" }, { "name": "财务管理", "state": "0" }, { "name": "核心业务", "state": "1" }, { "name": "柜面业务", "state": "2" }, { "name": "二代支付", "state": "2" }, { "name": "贷记卡", "state": "0" }, { "name": "支付宝卡通", "state": "0" }, { "name": "黄金交易", "state": "0" }, { "name": "国际结算", "state": "0" }, { "name": "跨境收付", "state": "0" }, { "name": "电子汇票", "state": "0" }];
+                this.dataList = datajson;
               }
             } else {
-              this.dataList = [{ "name": "网上银行", "state": "1" }, { "name": "ITSM运维", "state": "2" }, { "name": "财务管理", "state": "0" }, { "name": "核心业务", "state": "1" }, { "name": "柜面业务", "state": "2" }, { "name": "二代支付", "state": "2" }, { "name": "贷记卡", "state": "0" }, { "name": "支付宝卡通", "state": "0" }, { "name": "黄金交易", "state": "0" }, { "name": "国际结算", "state": "0" }, { "name": "跨境收付", "state": "0" }, { "name": "电子汇票", "state": "0" }];
+              this.dataList = datajson;
             }
-            this.transform(this.dataList);
+            // this.transform(this.dataList);
             this.render();
-          }
-        }, {
-          key: 'transform',
-          value: function transform(dataList) {
-            var that = this;
-            dataList.map(function (item) {
-              item.bgColor = that.panel.bgColor[item.state % 3];
-              // item.stateColor = that.panel.stateColor[item.state%3];
-            });
           }
         }, {
           key: 'onInitEditMode',

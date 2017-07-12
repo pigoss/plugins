@@ -1,4 +1,3 @@
-.state-container {}
 
 .state-container .state-list{
   display: flex;
@@ -9,8 +8,9 @@
 }
 
 .state-container .state-item{
-  flex: 1 1 8em;
+  flex: 1 1 7em;
   padding: 6px;
+  text-align: center;
 }
 /*
 .state-container .state-point{
@@ -22,10 +22,24 @@
 }*/
 
 .state-container .state-text{
-  width: 100%;
+  display: inline-block;
+  max-width: 80px;
   height: 100%;
   text-align: center;
   border-radius: 4px;
   color: rgba(255,255,255,.86);
-  line-height: 3.8em;
+  line-height: 1.6em;
+  font-size: 13px;
+  padding-top: 4;
 }
+
+.state-container .error{
+fill: rgba(234,74,45,1);
+}
+.state-container .heath{
+fill: rgba(45,148,215,1);
+}
+.state-container .icon{
+fill: #FDB225;
+}
+
