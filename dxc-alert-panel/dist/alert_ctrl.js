@@ -70,7 +70,8 @@ System.register(['lodash', 'app/plugins/sdk', './css/alert-panel.css!'], functio
 
           var panelDefaults = {
             USE_FAKE_DATA: true,
-            USE_URL: false,
+            fakeData: "[\n        {\n          time: '2017-05-06 12:39',\n          statue: '0',\n          info: [\n            {\n              name: '告警信息',\n              value: 'daidjaoesiadasdfdsafgsdfsdafdsfa'\n            },\n            {\n              name: '告警源',\n              value: '192.168.24.223'\n            }\n          ]\n        },\n        {\n          time: '2017-05-06 12:45',\n          statue: '1',\n          info: [\n            {\n              name: '告警信息',\n              value: 'daidjaossfasfasdfafsafasfsafsafsafs'\n            },\n            {\n              name: '告警源',\n              value: '192.168.24.223'\n            }\n          ]\n        },\n        {\n          time: '2017-05-06 12:48',\n          statue: '2',\n          info: [\n            {\n              name: '告警信息',\n              value: 'daidjaosfasdfasfasfsafsdfsafasfsafassi'\n            },\n            {\n              name: '告警源',\n              value: '192.168.24.223'\n            }\n          ]\n        }\n      ]",
+            USE_URL: true,
             url: '',
             request: '',
             updateInterval: 10000
@@ -118,9 +119,11 @@ System.register(['lodash', 'app/plugins/sdk', './css/alert-panel.css!'], functio
               }
             };
 
-            if (that.panel.USE_URL && that.panel.url && that.panel.request) {
+            if (that.panel.USE_URL && !that.panel.USE_FAKE_DATA && that.panel.url && that.panel.request) {
               xmlhttp.open("POST", that.panel.url, true);
               xmlhttp.send(that.panel.request);
+            } else {
+              xmlhttp = null;
             }
 
             this.$timeout(function () {
@@ -131,39 +134,11 @@ System.register(['lodash', 'app/plugins/sdk', './css/alert-panel.css!'], functio
           key: 'onDataReceived',
           value: function onDataReceived(data) {
             this.dataList = this.panel.USE_URL ? this.UrlData : data;
-            if (this.panel.USE_FAKE_DATA) {
-              this.dataList = [{
-                time: '2017-05-06 12:39',
-                statue: '0',
-                info: [{
-                  name: '告警信息',
-                  value: 'daidjaoesiadasdfdsafgsdfsdafdsfa'
-                }, {
-                  name: '告警源',
-                  value: '192.168.24.223'
-                }]
-              }, {
-                time: '2017-05-06 12:45',
-                statue: '1',
-                info: [{
-                  name: '告警信息',
-                  value: 'daidjaossfasfasdfafsafasfsafsafsafs'
-                }, {
-                  name: '告警源',
-                  value: '192.168.24.223'
-                }]
-              }, {
-                time: '2017-05-06 12:48',
-                statue: '2',
-                info: [{
-                  name: '告警信息',
-                  value: 'daidjaosfasdfasfasfsafsdfsafasfsafassi'
-                }, {
-                  name: '告警源',
-                  value: '192.168.24.223'
-                }]
-              }];
+
+            if (this.panel.USE_URL && this.panel.USE_FAKE_DATA && this.panel.fakeData) {
+              this.dataList = eval(this.panel.fakeData);
             }
+
             this.transform();
             this.render();
           }
@@ -171,6 +146,7 @@ System.register(['lodash', 'app/plugins/sdk', './css/alert-panel.css!'], functio
           key: 'transform',
           value: function transform() {
             var that = this;
+
             that.dataList.map(function (item) {
               item.bgColor = that.bgColor[item.statue % 3];
             });

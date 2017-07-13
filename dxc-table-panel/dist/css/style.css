@@ -28,10 +28,10 @@
     border-color: transparent;
     padding: .3em 1em;
     line-height: 2;
-    max-width: 12em;
+    /* max-width: 12em; */
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+     /* text-overflow: ellipsis;*/
+     /* white-space: nowrap; */
 }
 
 .dxc-table .table-panel-table tr:nth-child(even) {
