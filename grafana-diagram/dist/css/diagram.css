@@ -5,7 +5,7 @@
   float: right; }
 
 .diagram g.label div {
-  color: #d8d9da; }
+  color: #fff; }
 
 .diagram div p {
   text-align: center; }
@@ -15,7 +15,8 @@
   display: block; }
 
 g.node > * {
-  fill: white; }
+  fill: white;
+  text-align: center; }
 
 svg > g {
   overflow: visible;
@@ -31,7 +32,7 @@ svg > g {
 /* Gantt chart variables */
 .mermaid .label {
   font-family: 'trebuchet ms', verdana, arial;
-  color: #d8d9da; }
+  color: #fff; }
 
 .node rect,
 .node circle,
@@ -42,11 +43,11 @@ svg > g {
   stroke-width: 1px; }
 
 .edgePath .path, path.path {
-  stroke: green !important;
+  stroke: #fff !important;
   stroke-width: 1.5px; }
 
 .edgeLabel {
-  background-color: #e8e8e8; }
+  background-color: transparent; }
 
 .cluster rect {
   fill: #cdffb2 !important;
@@ -55,7 +56,7 @@ svg > g {
   stroke-width: 1px !important; }
 
 .cluster text {
-  fill: #d8d9da; }
+  fill: #fff; }
 
 .actor {
   stroke: transparent;
@@ -72,19 +73,19 @@ text.actor {
   stroke-width: 1.5;
   stroke-dasharray: "2 2";
   marker-end: "url(#arrowhead)";
-  stroke: green; }
+  stroke: #fff; }
 
 .messageLine1 {
   stroke-width: 1.5;
   stroke-dasharray: "2 2";
-  stroke: green; }
+  stroke: #fff; }
 
 #arrowhead {
-  fill: green; }
+  fill: #fff; }
 
 #crosshead path {
-  fill: green !important;
-  stroke: green !important; }
+  fill: #fff !important;
+  stroke: #fff !important; }
 
 .messageText {
   fill: #D8D9DA;
@@ -135,16 +136,16 @@ text.actor {
   opacity: 0.2; }
 
 .sectionTitle0 {
-  fill: #d8d9da; }
+  fill: #fff; }
 
 .sectionTitle1 {
-  fill: #d8d9da; }
+  fill: #fff; }
 
 .sectionTitle2 {
-  fill: #d8d9da; }
+  fill: #fff; }
 
 .sectionTitle3 {
-  fill: #d8d9da; }
+  fill: #fff; }
 
 .sectionTitle {
   text-anchor: start;

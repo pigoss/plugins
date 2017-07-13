@@ -1,13 +1,15 @@
 // $fill-default: #cde498;
 $fill-default: rgba(0,0,0,0);
-$path-default: green;
+// $path-default: green;
+$path-default: #fff;
 // $stroke-default: #13540c;
 $stroke-default: rgba(0,0,0,0);
 // $text-color: #333;
-$text-color: #d8d9da;
+$text-color: #fff;
 // $text-fill: #333;
-$text-fill: #d8d9da;
-$label-bg-color: #e8e8e8;
+$text-fill: #fff;
+// $label-bg-color: #e8e8e8;
+$label-bg-color: rgba(0,0,0,0);
 $cluster-fill: #cdffb2;
 $cluster-stroke: #6eaa49;
 $message-stroke: #777;
@@ -36,7 +38,8 @@ $task-fill: #487e3a;
 }
 
 g.node > * {
-	fill: white;
+  fill: white;
+  text-align: center;
 }
 
 svg > g {
@@ -104,7 +107,8 @@ text.actor {
   stroke: $path-default;
 }
 #arrowhead {
-  fill: $path-default;
+  // fill: $path-default;
+  fill:#fff;
 }
 #crosshead path {
   fill: $path-default !important;

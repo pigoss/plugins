@@ -694,16 +694,23 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 
 								if (targetElement[0][0] !== null) {
 									// probably a flowchart
-									targetElement.selectAll('rect,circle,polygon').style('fill', seriesItem.color);
+									// targetElement.selectAll('rect,circle,polygon').style('fill', seriesItem.color);
 
 									var div = targetElement.select('div');
 									var fo = targetElement.select('foreignObject');
 									// make foreign object element taller to accomdate value in FireFox/IE
 									fo.attr('height', 45);
 									// Add value text
-									var p = div.append('p');
+									div.style('text-align', 'center');
+									var br = div.append('br');
+									var p = div.append('span');
 									p.classed('diagram-value');
 									p.style('background-color', seriesItem.color);
+									p.style('display', 'inline-block');
+									p.style('margin', '6px 0');
+									p.style('padding', '0 8px');
+									p.style('line-height', '16px');
+									p.style('border-radius', '16px');
 									p.html(seriesItem.valueFormatted);
 								} else {
 									console.debug('finding element that contains id: ' + key);
