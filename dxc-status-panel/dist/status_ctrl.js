@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], function (_export, _context) {
+System.register(['lodash', 'app/plugins/sdk', './css/status-panel.css!'], function (_export, _context) {
   "use strict";
 
-  var _, MetricsPanelCtrl, _createClass, panelDefaults, StateCtrl;
+  var _, MetricsPanelCtrl, _createClass, panelDefaults, StatusCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -40,7 +40,7 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
       _ = _lodash.default;
     }, function (_appPluginsSdk) {
       MetricsPanelCtrl = _appPluginsSdk.MetricsPanelCtrl;
-    }, function (_cssStatePanelCss) {}],
+    }, function (_cssStatusPanelCss) {}],
     execute: function () {
       _createClass = function () {
         function defineProperties(target, props) {
@@ -66,22 +66,21 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
         // request: '',
         // updateInterval: 10000,
         bgColor: ['linear-gradient(to bottom right, #3abac7, #a375b6)', 'linear-gradient(to bottom right, #fcd98d, #f3b65b)', 'linear-gradient(to bottom right, #ffb88c, #e5658f)'
-
         // ],
-        // stateColor: [
+        // statusColor: [
         //   "linear-gradient(to bottom right, #4acda5, #3f74c6)",
         //   "linear-gradient(to bottom right, #3abac7, #a375b6)",
         //   "linear-gradient(to bottom right, #ffb88c, #e5658f)"
         ]
       };
 
-      _export('StateCtrl', StateCtrl = function (_MetricsPanelCtrl) {
-        _inherits(StateCtrl, _MetricsPanelCtrl);
+      _export('StatusCtrl', StatusCtrl = function (_MetricsPanelCtrl) {
+        _inherits(StatusCtrl, _MetricsPanelCtrl);
 
-        function StateCtrl($scope, $injector) {
-          _classCallCheck(this, StateCtrl);
+        function StatusCtrl($scope, $injector) {
+          _classCallCheck(this, StatusCtrl);
 
-          var _this = _possibleConstructorReturn(this, (StateCtrl.__proto__ || Object.getPrototypeOf(StateCtrl)).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (StatusCtrl.__proto__ || Object.getPrototypeOf(StatusCtrl)).call(this, $scope, $injector));
 
           _.defaultsDeep(_this.panel, panelDefaults);
 
@@ -94,7 +93,7 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
           return _this;
         }
 
-        _createClass(StateCtrl, [{
+        _createClass(StatusCtrl, [{
           key: 'onDataError',
           value: function onDataError() {
             this.render();
@@ -102,7 +101,7 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
         }, {
           key: 'onDataReceived',
           value: function onDataReceived(data) {
-            var datajson = [{ 'name': '兖矿电邮', 'state': '1' }, { 'name': '人力资源', 'state': '2' }, { 'name': '兖矿OA', 'state': '0' }, { 'name': '全面预算系统', 'state': '0' }, { 'name': '内部市场化系统', 'state': '0' }, { 'name': '呼叫中心', 'state': '0' }, { 'name': '地测部GIS', 'state': '0' }, { 'name': '基建PMIS', 'state': '0' }, { 'name': '安监局安全信息联网', 'state': '0' }, { 'name': '实时数据联网', 'state': '1' }, { 'name': '审计系统', 'state': '2' }, { 'name': '总院PACS', 'state': '1' }, { 'name': '煤业资金', 'state': '0' }, { 'name': '煤化工能源管控', 'state': '0' }, { 'name': '物资商城', 'state': '0' }, { 'name': '环保节能系统', 'state': '1' }, { 'name': '短信平台', 'state': '2' }, { 'name': '矿井微震联网系统', 'state': '0' }, { 'name': '纪委网上举报', 'state': '1' }, { 'name': '综合调度管理信息系统', 'state': '0' }, { 'name': '综合运营', 'state': '0' }, { 'name': '考勤', 'state': '0' }, { 'name': '矿井微震联网系统', 'state': '0' }, { 'name': '计划生育', 'state': '0' }, { 'name': '集团风险管理', 'state': '0' }];
+            var datajson = [{ 'name': '兖矿电邮', 'status': '1' }, { 'name': '人力资源', 'status': '2' }, { 'name': '兖矿OA', 'status': '0' }, { 'name': '全面预算系统', 'status': '0' }, { 'name': '内部市场化系统', 'status': '0' }, { 'name': '呼叫中心', 'status': '0' }, { 'name': '地测部GIS', 'status': '0' }, { 'name': '基建PMIS', 'status': '0' }, { 'name': '安监局安全信息联网', 'status': '0' }, { 'name': '实时数据联网', 'status': '1' }, { 'name': '审计系统', 'status': '2' }, { 'name': '总院PACS', 'status': '1' }, { 'name': '煤业资金', 'status': '0' }, { 'name': '煤化工能源管控', 'status': '0' }, { 'name': '物资商城', 'status': '0' }, { 'name': '环保节能系统', 'status': '1' }, { 'name': '短信平台', 'status': '2' }, { 'name': '矿井微震联网系统', 'status': '0' }, { 'name': '纪委网上举报', 'status': '1' }, { 'name': '综合调度管理信息系统', 'status': '0' }, { 'name': '综合运营', 'status': '0' }, { 'name': '考勤', 'status': '0' }, { 'name': '矿井微震联网系统', 'status': '0' }, { 'name': '计划生育', 'status': '0' }, { 'name': '集团风险管理', 'status': '0' }];
 
             if (data[0]) {
               if (data[0].dataList) {
@@ -119,7 +118,7 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
         }, {
           key: 'onInitEditMode',
           value: function onInitEditMode() {
-            // this.addEditorTab('Options', 'public/plugins/grafana-state-panel/editor.html', 2);
+            // this.addEditorTab('Options', 'public/plugins/grafana-status-panel/editor.html', 2);
           }
         }, {
           key: 'link',
@@ -130,13 +129,13 @@ System.register(['lodash', 'app/plugins/sdk', './css/state-panel.css!'], functio
           }
         }]);
 
-        return StateCtrl;
+        return StatusCtrl;
       }(MetricsPanelCtrl));
 
-      _export('StateCtrl', StateCtrl);
+      _export('StatusCtrl', StatusCtrl);
 
-      StateCtrl.templateUrl = 'module.html';
+      StatusCtrl.templateUrl = 'module.html';
     }
   };
 });
-//# sourceMappingURL=state_ctrl.js.map
+//# sourceMappingURL=status_ctrl.js.map

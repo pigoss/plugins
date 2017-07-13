@@ -1,14 +1,14 @@
 {
-  "name": "dxc-state-panel",
+  "name": "dxc-status-panel",
   "version": "1.0.0",
-  "description": "State Panel Plugin for Grafana",
+  "description": "Status Panel Plugin for Grafana",
   "main": "src/module.js",
   "scripts": {
     "lint": "eslint --color .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "state",
+    "status",
     "grafana",
     "plugin",
     "panel"

@@ -1,11 +1,11 @@
 {
   "type": "panel",
   "name": "状态点",
-  "id": "dxc-state-panel",
+  "id": "dxc-status-panel",
 
   "info": {
-    "description": "State Panel Plugin for Grafana",
-    "keywords": ["state", "panel"],
+    "description": "Status Panel Plugin for Grafana",
+    "keywords": ["status", "panel"],
     "version": "0.0.1",
     "updated": "2017-07-04"
   },
