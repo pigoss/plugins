@@ -1,20 +1,22 @@
-// $fill-default: #cde498;
 $fill-default: rgba(0,0,0,0);
-// $path-default: green;
-$path-default: #fff;
-// $stroke-default: #13540c;
 $stroke-default: rgba(0,0,0,0);
-// $text-color: #333;
 $text-color: #fff;
-// $text-fill: #333;
 $text-fill: #fff;
+$label-bg-color: #4f4e4e;
+$task-text-fill: #323D47;
+$task-stroke: rgba(255, 255, 255, 0.5);
+
+// $fill-default: #BDD5EA;
+$path-default: lightgrey;
+// $stroke-default: #81B1DB;
+// $text-color: #F9FFFE;
+// $text-fill: #333;
 // $label-bg-color: #e8e8e8;
-$label-bg-color: rgba(0,0,0,0);
-$cluster-fill: #cdffb2;
-$cluster-stroke: #6eaa49;
+$cluster-fill: #6D6D65;
+$cluster-stroke: rgba(255, 255, 255, 0.25);
 $message-stroke: #777;
-$message-fill: #D8D9DA;
-$task-fill: #487e3a;
+$message-fill: lightgrey;
+$task-fill: #BDD5EA;
 
 .diagram {
 	overflow: auto;
@@ -25,8 +27,24 @@ $task-fill: #487e3a;
 }
 
 .diagram g.label div {
-	color: $text-color;
+  color: $text-color;
+  text-align: center;
 }
+
+.diagram g.label img {
+  display: inline-block;
+  margin: 0 auto;
+  width: 45px;
+  height: 48px;
+  padding-bottom: 3px;
+}
+
+// .diagram g.label i {
+//   display: inline-block;
+//   margin: 0 auto;
+//   width: 45px;
+//   height: 45px;
+// }
 
 .diagram div p {
 	text-align: center;
@@ -38,8 +56,7 @@ $task-fill: #487e3a;
 }
 
 g.node > * {
-  fill: white;
-  text-align: center;
+	fill: white;
 }
 
 svg > g {
@@ -48,8 +65,12 @@ svg > g {
 }
 
 .diagram-value {
-	background-color: white;
-	padding: 3px;
+  display: inline-block;
+  background-color: white;
+  margin: 3px auto;
+  padding: 0 6px;
+  line-height: 16px;
+  border-radius: 16px;
 	text-align: center;
 }
 
@@ -57,8 +78,7 @@ svg > g {
 /* Sequence Diagram variables */
 /* Gantt chart variables */
 .mermaid .label {
-  font-family: 'trebuchet ms', verdana, arial;
-  color: $text-color;
+  color: #323D47;
 }
 .node rect,
 .node circle,
@@ -72,7 +92,11 @@ svg > g {
   stroke: $path-default !important;
   stroke-width: 1.5px;
 }
+.edgePath defs, marker path {
+  fill: $path-default !important;
+}
 .edgeLabel {
+  border-radius: 3px;
   background-color: $label-bg-color;
 }
 .cluster rect {
@@ -93,7 +117,7 @@ text.actor {
   stroke: none;
 }
 .actor-line {
-  stroke: grey;
+  stroke: $path-default;
 }
 .messageLine0 {
   stroke-width: 1.5;
@@ -107,8 +131,7 @@ text.actor {
   stroke: $path-default;
 }
 #arrowhead {
-  // fill: $path-default;
-  fill:#fff;
+  fill: $path-default !important;
 }
 #crosshead path {
   fill: $path-default !important;
@@ -119,11 +142,11 @@ text.actor {
   stroke: none;
 }
 .labelBox {
-  stroke: #326932;
+  stroke: $stroke-default;
   fill: $fill-default;
 }
 .labelText {
-  fill: black;
+  fill: #323D47;
   stroke: none;
 }
 .loopText {
@@ -134,7 +157,7 @@ text.actor {
   stroke-width: 2;
   stroke-dasharray: "2 2";
   marker-end: "url(#arrowhead)";
-  stroke: #326932;
+  stroke: $stroke-default;
 }
 .note {
   stroke: $cluster-stroke;
@@ -152,10 +175,10 @@ text.actor {
   opacity: 0.2;
 }
 .section0 {
-  fill: $cluster-stroke;
+  fill: rgba(255, 255, 255, 0.3);
 }
 .section2 {
-  fill: $cluster-stroke;
+  fill: #EAE8B9;
 }
 .section1,
 .section3 {
@@ -181,9 +204,13 @@ text.actor {
 }
 /* Grid and axis */
 .grid .tick {
-  stroke: lightgrey;
+  stroke: rgba(255, 255, 255, 0.3);
   opacity: 0.3;
   shape-rendering: crispEdges;
+}
+.grid .tick text {
+  fill: $message-fill;
+  opacity: 0.5;
 }
 .grid path {
   stroke-width: 0;
@@ -191,7 +218,7 @@ text.actor {
 /* Today line */
 .today {
   fill: none;
-  stroke: red;
+  stroke: #DB5757;
   stroke-width: 2px;
 }
 /* Task styling */
@@ -204,12 +231,12 @@ text.actor {
   font-size: 11px;
 }
 .taskTextOutsideRight {
-  fill: black;
+  fill: $task-text-fill;
   text-anchor: start;
   font-size: 11px;
 }
 .taskTextOutsideLeft {
-  fill: black;
+  fill: $task-text-fill;
   text-anchor: end;
   font-size: 11px;
 }
@@ -218,22 +245,22 @@ text.actor {
 .taskText1,
 .taskText2,
 .taskText3 {
-  fill: white;
+  fill: $task-text-fill;
 }
 .task0,
 .task1,
 .task2,
 .task3 {
   fill: $task-fill;
-  stroke: $stroke-default;
+  stroke: $task-stroke;
 }
 .taskTextOutside0,
 .taskTextOutside2 {
-  fill: black;
+  fill: $message-fill;
 }
 .taskTextOutside1,
 .taskTextOutside3 {
-  fill: black;
+  fill: $message-fill;
 }
 /* Active task */
 .active0,
@@ -241,13 +268,13 @@ text.actor {
 .active2,
 .active3 {
   fill: $fill-default;
-  stroke: $stroke-default;
+  stroke: $task-stroke;
 }
 .activeText0,
 .activeText1,
 .activeText2,
 .activeText3 {
-  fill: black !important;
+  fill: $task-text-fill !important;
 }
 /* Completed task */
 .done0,
@@ -262,22 +289,22 @@ text.actor {
 .doneText1,
 .doneText2,
 .doneText3 {
-  fill: black !important;
+  fill: $task-text-fill !important;
 }
 /* Tasks on the critical line */
 .crit0,
 .crit1,
 .crit2,
 .crit3 {
-  stroke: #ff8888;
-  fill: red;
+  stroke: #E83737;
+  fill: #E83737;
   stroke-width: 2;
 }
 .activeCrit0,
 .activeCrit1,
 .activeCrit2,
 .activeCrit3 {
-  stroke: #ff8888;
+  stroke: #E83737;
   fill: $fill-default;
   stroke-width: 2;
 }
@@ -285,7 +312,7 @@ text.actor {
 .doneCrit1,
 .doneCrit2,
 .doneCrit3 {
-  stroke: #ff8888;
+  stroke: #E83737;
   fill: lightgrey;
   stroke-width: 2;
   cursor: pointer;
@@ -295,18 +322,18 @@ text.actor {
 .doneCritText1,
 .doneCritText2,
 .doneCritText3 {
-  fill: black !important;
+  fill: lightgrey !important;
 }
 .activeCritText0,
 .activeCritText1,
 .activeCritText2,
 .activeCritText3 {
-  fill: black !important;
+  fill: #323D47 !important;
 }
 .titleText {
   text-anchor: middle;
   font-size: 18px;
-  fill: black;
+  fill: lightgrey;
 }
 /*
 

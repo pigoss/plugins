@@ -5,7 +5,15 @@
   float: right; }
 
 .diagram g.label div {
-  color: #fff; }
+  color: #fff;
+  text-align: center; }
+
+.diagram g.label img {
+  display: inline-block;
+  margin: 0 auto;
+  width: 45px;
+  height: 48px;
+  padding-bottom: 3px; }
 
 .diagram div p {
   text-align: center; }
@@ -15,24 +23,26 @@
   display: block; }
 
 g.node > * {
-  fill: white;
-  text-align: center; }
+  fill: white; }
 
 svg > g {
   overflow: visible;
   display: block; }
 
 .diagram-value {
+  display: inline-block;
   background-color: white;
-  padding: 3px;
+  margin: 3px auto;
+  padding: 0 6px;
+  line-height: 16px;
+  border-radius: 16px;
   text-align: center; }
 
 /* Flowchart variables */
 /* Sequence Diagram variables */
 /* Gantt chart variables */
 .mermaid .label {
-  font-family: 'trebuchet ms', verdana, arial;
-  color: #fff; }
+  color: #323D47; }
 
 .node rect,
 .node circle,
@@ -43,16 +53,20 @@ svg > g {
   stroke-width: 1px; }
 
 .edgePath .path, path.path {
-  stroke: #fff !important;
+  stroke: lightgrey !important;
   stroke-width: 1.5px; }
 
+.edgePath defs, marker path {
+  fill: lightgrey !important; }
+
 .edgeLabel {
-  background-color: transparent; }
+  border-radius: 3px;
+  background-color: #4f4e4e; }
 
 .cluster rect {
-  fill: #cdffb2 !important;
+  fill: #6D6D65 !important;
   rx: 4  !important;
-  stroke: #6eaa49 !important;
+  stroke: rgba(255, 255, 255, 0.25) !important;
   stroke-width: 1px !important; }
 
 .cluster text {
@@ -67,50 +81,50 @@ text.actor {
   stroke: none; }
 
 .actor-line {
-  stroke: grey; }
+  stroke: lightgrey; }
 
 .messageLine0 {
   stroke-width: 1.5;
   stroke-dasharray: "2 2";
   marker-end: "url(#arrowhead)";
-  stroke: #fff; }
+  stroke: lightgrey; }
 
 .messageLine1 {
   stroke-width: 1.5;
   stroke-dasharray: "2 2";
-  stroke: #fff; }
+  stroke: lightgrey; }
 
 #arrowhead {
-  fill: #fff; }
+  fill: lightgrey !important; }
 
 #crosshead path {
-  fill: #fff !important;
-  stroke: #fff !important; }
+  fill: lightgrey !important;
+  stroke: lightgrey !important; }
 
 .messageText {
-  fill: #D8D9DA;
+  fill: lightgrey;
   stroke: none; }
 
 .labelBox {
-  stroke: #326932;
+  stroke: transparent;
   fill: transparent; }
 
 .labelText {
-  fill: black;
+  fill: #323D47;
   stroke: none; }
 
 .loopText {
-  fill: #D8D9DA;
+  fill: lightgrey;
   stroke: none; }
 
 .loopLine {
   stroke-width: 2;
   stroke-dasharray: "2 2";
   marker-end: "url(#arrowhead)";
-  stroke: #326932; }
+  stroke: transparent; }
 
 .note {
-  stroke: #6eaa49;
+  stroke: rgba(255, 255, 255, 0.25);
   fill: #fff5ad; }
 
 .noteText {
@@ -125,10 +139,10 @@ text.actor {
   opacity: 0.2; }
 
 .section0 {
-  fill: #6eaa49; }
+  fill: rgba(255, 255, 255, 0.3); }
 
 .section2 {
-  fill: #6eaa49; }
+  fill: #EAE8B9; }
 
 .section1,
 .section3 {
@@ -154,9 +168,13 @@ text.actor {
 
 /* Grid and axis */
 .grid .tick {
-  stroke: lightgrey;
+  stroke: rgba(255, 255, 255, 0.3);
   opacity: 0.3;
   shape-rendering: crispEdges; }
+
+.grid .tick text {
+  fill: lightgrey;
+  opacity: 0.5; }
 
 .grid path {
   stroke-width: 0; }
@@ -164,7 +182,7 @@ text.actor {
 /* Today line */
 .today {
   fill: none;
-  stroke: red;
+  stroke: #DB5757;
   stroke-width: 2px; }
 
 /* Task styling */
@@ -177,12 +195,12 @@ text.actor {
   font-size: 11px; }
 
 .taskTextOutsideRight {
-  fill: black;
+  fill: #323D47;
   text-anchor: start;
   font-size: 11px; }
 
 .taskTextOutsideLeft {
-  fill: black;
+  fill: #323D47;
   text-anchor: end;
   font-size: 11px; }
 
@@ -191,22 +209,22 @@ text.actor {
 .taskText1,
 .taskText2,
 .taskText3 {
-  fill: white; }
+  fill: #323D47; }
 
 .task0,
 .task1,
 .task2,
 .task3 {
-  fill: #487e3a;
-  stroke: transparent; }
+  fill: #BDD5EA;
+  stroke: rgba(255, 255, 255, 0.5); }
 
 .taskTextOutside0,
 .taskTextOutside2 {
-  fill: black; }
+  fill: lightgrey; }
 
 .taskTextOutside1,
 .taskTextOutside3 {
-  fill: black; }
+  fill: lightgrey; }
 
 /* Active task */
 .active0,
@@ -214,13 +232,13 @@ text.actor {
 .active2,
 .active3 {
   fill: transparent;
-  stroke: transparent; }
+  stroke: rgba(255, 255, 255, 0.5); }
 
 .activeText0,
 .activeText1,
 .activeText2,
 .activeText3 {
-  fill: black !important; }
+  fill: #323D47 !important; }
 
 /* Completed task */
 .done0,
@@ -235,22 +253,22 @@ text.actor {
 .doneText1,
 .doneText2,
 .doneText3 {
-  fill: black !important; }
+  fill: #323D47 !important; }
 
 /* Tasks on the critical line */
 .crit0,
 .crit1,
 .crit2,
 .crit3 {
-  stroke: #ff8888;
-  fill: red;
+  stroke: #E83737;
+  fill: #E83737;
   stroke-width: 2; }
 
 .activeCrit0,
 .activeCrit1,
 .activeCrit2,
 .activeCrit3 {
-  stroke: #ff8888;
+  stroke: #E83737;
   fill: transparent;
   stroke-width: 2; }
 
@@ -258,7 +276,7 @@ text.actor {
 .doneCrit1,
 .doneCrit2,
 .doneCrit3 {
-  stroke: #ff8888;
+  stroke: #E83737;
   fill: lightgrey;
   stroke-width: 2;
   cursor: pointer;
@@ -268,18 +286,18 @@ text.actor {
 .doneCritText1,
 .doneCritText2,
 .doneCritText3 {
-  fill: black !important; }
+  fill: lightgrey !important; }
 
 .activeCritText0,
 .activeCritText1,
 .activeCritText2,
 .activeCritText3 {
-  fill: black !important; }
+  fill: #323D47 !important; }
 
 .titleText {
   text-anchor: middle;
   font-size: 18px;
-  fill: black; }
+  fill: lightgrey; }
 
 /*
 
@@ -374,8 +392,8 @@ div.mermaidTooltip {
   padding: 2px;
   font-family: 'trebuchet ms', verdana, arial;
   font-size: 12px;
-  background: #cdffb2;
-  border: 1px solid #6eaa49;
+  background: #6D6D65;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 2px;
   pointer-events: none;
   z-index: 100; }

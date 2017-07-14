@@ -676,7 +676,7 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 							ctrl.svgData = {}; // get rid of the data after consuming it. This prevents adding duplicate DOM elements
 							console.info('updating svg style');
 							var svg = $(document.getElementById(ctrl.panel.graphId));
-							$(svg).css('min-width', $(svg).css('max-width'));
+							// $(svg).css('min-width', $(svg).css('max-width'));
 							if (ctrl.panel.maxWidth) {
 								$(svg).css('max-width', '100%');
 							}
@@ -703,15 +703,10 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 									// Add value text
 									div.style('text-align', 'center');
 									var br = div.append('br');
-									var p = div.append('span');
-									p.classed('diagram-value');
-									p.style('background-color', seriesItem.color);
-									p.style('display', 'inline-block');
-									p.style('margin', '6px 0');
-									p.style('padding', '0 8px');
-									p.style('line-height', '16px');
-									p.style('border-radius', '16px');
-									p.html(seriesItem.valueFormatted);
+									var span = div.append('span');
+									span.classed('diagram-value', true);
+									span.style('background-color', seriesItem.color);
+									span.html(seriesItem.valueFormatted);
 								} else {
 									console.debug('finding element that contains id: ' + key);
 									// maybe a flowchart with an alias text node
@@ -720,7 +715,7 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 										return $(this).attr('id') === key;
 									});
 									if (targetElement.length > 0) {
-										targetElement.parents('.node').find('rect, circle, polygon').css('fill', seriesItem.color);
+										targetElement.parents('.node').find('rect, circle,spanolygon').css('fill', seriesItem.color);
 										// make foreign object element taller to accomdate value in FireFox/IE
 										targetElement.parents('.node').find('foreignObject').attr('height', 45);
 										// for edge matches
