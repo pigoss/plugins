@@ -1,0 +1,16 @@
+{
+  "type": "panel",
+  "name": "饼图",
+  "id": "dxc-pie-panel",
+
+  "info": {
+    "description": "Echarts panel for grafana by DXC Technology",
+    "keywords": ["Echarts", "pie", "panel"],
+    "version": "1.0.0"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "4.1.x",
+    "plugins": [ ]
+  }
+}
