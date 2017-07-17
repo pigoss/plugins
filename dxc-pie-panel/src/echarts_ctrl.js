@@ -75,8 +75,8 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     onInitEditMode() {
-        this.addEditorTab('数据', 'public/plugins/dxc-echarts-panel/editer-metric.html', 2);
-        this.addEditorTab('Ecahrts配置', 'public/plugins/dxc-echarts-panel/editor-echarts.html', 3);
+        this.addEditorTab('数据', 'public/plugins/dxc-pie-panel/editer-metric.html', 2);
+        this.addEditorTab('Echarts配置', 'public/plugins/dxc-pie-panel/editor-echarts.html', 3);
     }
 
     link(scope, elem, attrs, ctrl) {
@@ -97,11 +97,6 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         setHeight();
 
         let myChart = echarts.init($panelContainer, 'dark');
-
-        // bad hank
-        setTimeout(function () {
-            myChart.resize();
-        }, 1000);
 
         // 防止重复触发事件
         var callInterval = function callInterval() {
