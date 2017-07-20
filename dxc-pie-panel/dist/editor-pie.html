@@ -1,0 +1,71 @@
+<div class="edit-tab-with-sidemenu">
+    <aside class="edit-sidemenu-aside">
+        <ul class="edit-sidemenu">
+            <li ng-repeat="series in ctrl.panel.echartsOption.series" ng-class="{active: ctrl.subTabIndex === $index}">
+                <a ng-click="ctrl.subTabIndex  = $index">{{series.name||'新饼图'}}</a>
+            </li>
+            <li>
+                <a class="pointer" ng-click="ctrl.addSeries()"><i class="fa fa-plus"></i>&nbsp;</a>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="edit-tab-content" ng-repeat="series in ctrl.panel.echartsOption.series" ng-if="ctrl.subTabIndex === $index">
+        <div class="editor-row">
+            <div class="section gf-form-group">
+                <h5 class="section-heading">添加数据</h5>
+                <div class="gf-form">
+                    <div class="gf-form-inline" ng-repeat="data in series.data">
+                        <div class="gf-form">
+                            <select class="gf-form-input width-8" ng-options="d for d in ctrl.getData()" ng-model="data.name" ng-change="ctrl.onRender()"></select>
+                        </div>
+                        <div class="gf-form">
+                            <label class="gf-form-label">
+							    <i class="fa fa-trash pointer" ng-click="ctrl.remove(series.data, $index)"></i>
+						    </label>
+                        </div>
+                    </div>
+                    <div class="gf-form">
+                        <label class="gf-form-label">
+						<i class="fa fa-plus pointer" ng-click="ctrl.addData(series.data)"></i>
+					</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="editor-row">
+            <div class="section gf-form-group">
+                <h5 class="section-heading">样式配置
+                    <tip>例:80%</tip>
+                </h5>
+                <div class="gf-form">
+                    <label class="gf-form-label width-8">饼图名称</label>
+                    <input type="text" class="input-small gf-form-input gf-form-input--grow" ng-change="ctrl.onRender()" ng-model="series.name"
+                        ng-model-onblur/>
+                </div>
+                <div class="gf-form">
+                    <label class="gf-form-label width-8">内半径</label>
+                    <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="series.minRadius" ng-model-onblur/>
+                    <label class="gf-form-label width-8">外半径</label>
+                    <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="series.maxRadius" ng-model-onblur/>
+                </div>
+                <div class="gf-form">
+                    <label class="gf-form-label width-8">位置</label>
+                    <label class="gf-form-label label-width-grow">X</label>
+                    <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="series.centerX" ng-model-onblur/>
+                    <label class="gf-form-label label-width-grow">Y</label>
+                    <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="series.centerY" ng-model-onblur/>
+                </div>
+                <div class="gf-form">
+                    <label class="gf-form-label width-8">饼图显示方式</label>
+                    <select class="gf-form-input width-12" ng-model="series.roseType" ng-options="c.value as c.text for c in [{value: false ,text: '普通饼图'},{value: 'area',text: '按面积表示大小'},{value: 'radius',text: '按半径表示大小'}]"
+                        ng-change="ctrl.onRender()"></select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <button class="btn btn-danger btn-small" ng-click="ctrl.remove(ctrl.panel.echartsOption.series,$index)">
+                <i class="fa fa-trash"></i> 移除饼图
+            </button>
+        </div>
+    </div>
+</div>

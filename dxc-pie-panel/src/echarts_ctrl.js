@@ -12,7 +12,8 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
         const panelDefaults = {
             echartsOption: {
-                colorArr: ['#85b6b2', '#6d4f8d', '#cd5e7e', '#e38980', '#f7db88'],
+                bgColor: '#1f1d1d',
+                colorArr: ['rgba(234,74,45,1)', '#FDB225', 'rgba(45,148,215,1)', '#16A59C', 'rgba(234,74,45,0.9)', '#b5c334'],
                 title: '主机容量',
                 subTitle: '',
                 titleX: 'center',
@@ -20,17 +21,49 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 toolBoxShow: true,
                 legendShow: true,
                 legendOrient: 'vertical',
-                legendTop: '',
+                legendTop: '0%',
                 legendLeft: 'left',
-                IS_CONCENTRIC: true,
-                roseType: 'area',
-                minRadius: '0%',
-                maxRadius: '75%',
-                centerX: '50%',
-                centerY: '50%'
+                series: [
+                    {
+                        name: '饼图1',
+                        IS_CONCENTRIC: false,
+                        roseType: false,
+                        minRadius: '0%',
+                        maxRadius: '50%',
+                        centerX: '25%',
+                        centerY: '50%',
+                        data: [
+                            {
+                                name: '已用容量',
+                                name2: '剩余容量'
+                            }, {
+                                name: '剩余容量',
+                                name2: '已用容量'
+                            }
+                        ]
+                    },
+                    {
+                        name: '饼图2',
+                        IS_CONCENTRIC: true,
+                        roseType: false,
+                        minRadius: '30%',
+                        maxRadius: '50%',
+                        centerX: '75%',
+                        centerY: '50%',
+                        data: [
+                            {
+                                name: '已用容量',
+                                name2: '剩余容量'
+                            }, {
+                                name: '剩余容量',
+                                name2: '已用容量'
+                            }
+                        ]
+                    }
+                ]
             },
-            USE_URL: false,
-            USE_FAKE_DATA: true,
+            USE: 'FAKE_DATA',
+
             fakeData: '[{"target":"已用容量","datapoints":[["115",1499285716736]]},{"target":"剩余容量","datapoints":[["87",1499285716736]]}]',
             url: '',
             request: '',
@@ -45,7 +78,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
         this.events.on('panel-initialized', this.render.bind(this));
 
-        if (this.panel.USE_URL && this.panel.USE_FAKE_DATA && this.panel.fakeData) {
+        if (this.panel.USE === 'FAKE_DATA' && this.panel.fakeData) {
             let that = this;
             setTimeout(function () {
                 that.onDataReceived(that.panel.fakeData);
@@ -72,7 +105,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             }
         };
 
-        if (that.panel.USE_URL && !that.panel.USE_FAKE_DATA && that.panel.url && that.panel.request) {
+        if (that.panel.USE === 'URL' && that.panel.url && that.panel.request) {
             xmlhttp.open("POST", that.panel.url, true);
             xmlhttp.send(that.panel.request);
         } else {
@@ -83,13 +116,16 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     onDataReceived(dataList) {
-        this.data = this.panel.USE_URL ? this.UrlData : dataList;
 
-        if (this.panel.USE_URL && this.panel.USE_FAKE_DATA && this.panel.fakeData) {
-            this.data = eval(this.panel.fakeData); // jshint ignore:line
+
+        this.dataList = this.panel.USE === 'URL' ? this.UrlData : dataList;
+
+        if (this.panel.USE === 'FAKE_DATA' && this.panel.fakeData) {
+            this.dataList = eval(this.panel.fakeData); // jshint ignore:line
         }
 
-        this.data = this.translateData(this.data);
+        this.data = this.translateData(this.dataList);
+        console.log(this.data);
         this.onRender();
     }
 
@@ -100,18 +136,16 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     translateData(data) {
-        if (data.length) {
-            let dataArr = [];
+        let dataArr = [];
+        if (_.isArray(data)) {
             for (let i = 0; i < data.length; i++) {
                 dataArr.push({
                     name: data[i].target,
                     value: data[i].datapoints[data[i].datapoints.length - 1][0]
                 });
             }
-            return dataArr;
-        } else {
-            return [];
         }
+        return dataArr;
     }
 
     onDataError(err) {
@@ -120,8 +154,12 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
     onInitEditMode() {
         this.subTabIndex = 0;
-        this.addEditorTab('数据', 'public/plugins/dxc-pie-panel/editer-metric.html', 2);
-        this.addEditorTab('Echarts配置', 'public/plugins/dxc-pie-panel/editor-echarts.html', 3);
+        this.addEditorTab('数据配置', 'public/plugins/dxc-pie-panel/editer-metric.html', 2);
+        this.addEditorTab('常规配置', 'public/plugins/dxc-pie-panel/editor-echarts.html', 3);
+        this.addEditorTab('饼图配置', 'public/plugins/dxc-pie-panel/editor-pie.html', 4);
+    } addColor() {
+        this.panel.echartsOption.colorArr.push('rgba(255, 255, 255, 1)');
+        this.onRender();
     }
 
     changeColor(colorIndex, color) {
@@ -129,16 +167,38 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.onRender();
     }
 
-    removeColor(colorIndex) {
-        this.panel.echartsOption.colorArr.splice(colorIndex, 1);
+    addSeries() {
+        this.panel.echartsOption.series.push({
+            name: '',
+            IS_CONCENTRIC: false,
+            roseType: false,
+            minRadius: '0%',
+            maxRadius: '55%',
+            centerX: '50%',
+            centerY: '50%',
+            data: []
+        });
         this.onRender();
     }
 
-    addColor() {
-        this.panel.echartsOption.colorArr.push('rgba(255, 255, 255, 1)');
+    addData(dataArr) {
+        dataArr.push({
+            name: '',
+            name2: ''
+        });
         this.onRender();
     }
 
+    remove(obj, index) {
+        obj.splice(index, 1);
+        this.onRender();
+    }
+
+    getData() {
+        return _.map(this.data, function (data) {
+                return data.name;
+        });
+    }
     // invertColor() {
     //     this.panel.echartsOption.colorArr.reverse();
     //     this.onRender();
@@ -192,7 +252,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 myChart.clear();
 
                 myChart.setOption({
-                    backgroundColor: '#1f1d1d',
+                    backgroundColor: ctrl.panel.echartsOption.bgColor,
                     color: ctrl.panel.echartsOption.colorArr,
                     title: {
                         text: ctrl.panel.echartsOption.title,
@@ -226,66 +286,47 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                         left: ctrl.panel.echartsOption.legendLeft,
                         data: getLegend()
                     },
-                    series: getSeries()
+                    series: getSeries(),
+
                 });
+                var count = 0;
+                callInterval(function () {
+                    myChart.dispatchAction({
+                        type: 'downplay',
+                        seriesIndex: 0
+                    });
+                    myChart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: (count++) % 4
+                    });
+                }, 2000);
             }
         }
 
         function getLegend() {
-            if (ctrl.data) {
-                let legend = [];
+            let legend = [];
+            if (_.isArray(ctrl.data)) {
                 for (let i = 0; i < ctrl.data.length; i++) {
                     legend.push(ctrl.data[i].name);
                 }
-                return legend;
             }
+            return legend;
         }
 
         function getSeries() {
             let seriesArr = [];
 
-            if (!ctrl.panel.echartsOption.IS_CONCENTRIC) {
-                seriesArr.push({
-                    name: ctrl.panel.echartsOption.title,
-                    type: 'pie',
-                    radius: [ctrl.panel.echartsOption.minRadius, ctrl.panel.echartsOption.maxRadius],
-                    center: [ctrl.panel.echartsOption.centerX, ctrl.panel.echartsOption.centerY],
-                    roseType: ctrl.panel.echartsOption.roseType,
-                    data: ctrl.data,
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                });
-            } else {
-                if (ctrl.data) {
-                    for (let i = 0; i < Math.floor(ctrl.data.length / 2); i++) {
+            if (_.isArray(ctrl.data)) {
+                ctrl.panel.echartsOption.series.forEach(function (series, index) {
+                    if (!series.IS_CONCENTRIC) {
                         seriesArr.push({
-                            name: ctrl.panel.echartsOption.title,
+                            name: series.name,
                             type: 'pie',
-                            clockWise: false,
-                            hoverAnimation: false,
-                            radius: getRadius(i, ctrl.panel.echartsOption.minRadius, ctrl.panel.echartsOption.maxRadius),
-                            center: [ctrl.panel.echartsOption.centerX, ctrl.panel.echartsOption.centerY],
-                            data: [
-                                ctrl.data[2 * i],
-                                {
-                                    name: '',
-                                    value: ctrl.data[2 * i + 1].value,
-                                    itemStyle: {
-                                        normal: {
-                                            color: 'rgba(0,0,0,0)',
-                                            label: { show: false },
-                                            labelLine: { show: false }
-                                        },
-                                        emphasis: {
-                                            color: 'rgba(0,0,0,0)'
-                                        }
-                                    }
-                                }
-                            ],
+                            radius: [series.minRadius, series.maxRadius],
+                            center: [series.centerX, series.centerY],
+                            roseType: series.roseType,
+                            data: getData(series.data, ctrl.data, series.IS_CONCENTRIC),
                             itemStyle: {
                                 emphasis: {
                                     shadowBlur: 10,
@@ -293,10 +334,26 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                                 }
                             }
                         });
+                    } else {
+                        series.data.forEach((data, index) => {
+                            seriesArr.push({
+                                name: series.name,
+                                type: 'pie',
+                                clockWise: false,
+                                hoverAnimation: false,
+                                radius: getRadius(index, series.minRadius, series.maxRadius),
+                                center: [series.centerX, series.centerY],
+                                data: getData([data], ctrl.data, series.IS_CONCENTRIC),
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            });
+                        });
                     }
-                } else {
-                    seriesArr = [];
-                }
+                });
             }
 
             return seriesArr;
@@ -307,6 +364,42 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             let unit = reg.test(min) && reg.test(max) ? '%' : 0;
             let interval = (parseFloat(max) - parseFloat(min)) / ctrl.data.length;
             return [(interval * index + parseFloat(min) + unit), (interval * (index + 1) + parseFloat(min) + unit)];
+        }
+
+        function getData(seriesData, allData, IS_CONCENTRIC) {
+            let newData = [];
+
+            if (_.isArray(seriesData) && _.isArray(allData)) {
+                seriesData.forEach(m => {
+                    allData.forEach(n => {
+                        if (!IS_CONCENTRIC) {
+                            if (m.name == n.name) {
+                                newData.push(n);
+                            }
+                        } else {
+                            if (m.name == n.name) newData[0] = n;
+                            if (m.name2 == n.name) {
+                                newData[1] = {
+                                    name: '',
+                                    value: n.value,
+                                    itemStyle: {
+                                        normal: {
+                                            color: 'rgba(0,0,0,0)',
+                                            label: { show: false },
+                                            labelLine: { show: false }
+                                        },
+                                        emphasis: {
+                                            color: 'rgba(0,0,0,0)'
+                                        }
+                                    }
+                                };
+                            }
+                        }
+                    });
+                });
+            }
+
+            return newData;
         }
 
         this.events.on('render', function () {
