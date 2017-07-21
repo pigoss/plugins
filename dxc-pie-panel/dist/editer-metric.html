@@ -1,11 +1,9 @@
-
-    <div class="section gf-form-group">
-        <div class="gf-form">
+<div class="section gf-form-group">
+    <div class="gf-form">
         <label class="gf-form-label width-8">数据源</label>
-     <select class="gf-form-input width-8" ng-model="ctrl.panel.USE" ng-options="c.value as c.text for c in [{value: 'FALSE',text: '原始数据'},{value: 'URL',text: 'Post请求'},{value: 'FAKE_DATA',text: '假数据'}]"
-                    ng-change="ctrl.onRender()"></select>
+        <select class="gf-form-input width-8" ng-model="ctrl.panel.USE" ng-options="c.value as c.text for c in [{value: 'FALSE',text: '原始数据'},{value: 'URL',text: 'Post请求'},{value: 'FAKE_DATA',text: '假数据'}]" ng-change="ctrl.onRender()"></select>
     </div>
-    </div>
+</div>
 
 
 <div class="editor-row">
@@ -30,6 +28,5 @@
             </div>
         </div>
     </div>
-    <textarea class="gf-form-input"  ng-if="ctrl.panel.USE==='FAKE_DATA'" ng-model="ctrl.panel.fakeData" rows="10" style="width:100%" ng-change="ctrl.onDataReceived()" ng-model-onblur></textarea>
+    <textarea class="gf-form-input" ng-if="ctrl.panel.USE==='FAKE_DATA'" ng-model="ctrl.panel.fakeData" rows="10" style="width:100%" ng-change="ctrl.onDataReceived()" ng-model-onblur></textarea>
 </div>
-

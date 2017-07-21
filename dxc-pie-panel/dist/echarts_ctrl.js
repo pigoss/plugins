@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echarts-liquidfill.min', './libs/dark', './style.css!'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echarts-liquidfill.min', './libs/dark', './style.css!', './PieA'], function (_export, _context) {
     "use strict";
 
-    var MetricsPanelCtrl, _, echarts, _createClass, EchartsCtrl;
+    var MetricsPanelCtrl, _, echarts, pieA, _createClass, pieTypeArr, EchartsCtrl;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -42,7 +42,9 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
             _ = _lodash.default;
         }, function (_libsEchartsMin) {
             echarts = _libsEchartsMin.default;
-        }, function (_libsEchartsLiquidfillMin) {}, function (_libsDark) {}, function (_styleCss) {}],
+        }, function (_libsEchartsLiquidfillMin) {}, function (_libsDark) {}, function (_styleCss) {}, function (_PieA) {
+            pieA = _PieA.pieA;
+        }],
         execute: function () {
             _createClass = function () {
                 function defineProperties(target, props) {
@@ -62,6 +64,11 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                 };
             }();
 
+            pieTypeArr = [{
+                name: '并列',
+                func: pieA
+            }];
+
             _export('EchartsCtrl', EchartsCtrl = function (_MetricsPanelCtrl) {
                 _inherits(EchartsCtrl, _MetricsPanelCtrl);
 
@@ -77,43 +84,13 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                             title: '主机容量',
                             subTitle: '',
                             titleX: 'center',
-                            titleY: '',
+                            titleY: '0%',
                             toolBoxShow: true,
                             legendShow: true,
                             legendOrient: 'vertical',
                             legendTop: '0%',
                             legendLeft: 'left',
-                            series: [{
-                                name: '饼图1',
-                                IS_CONCENTRIC: false,
-                                roseType: false,
-                                minRadius: '0%',
-                                maxRadius: '50%',
-                                centerX: '25%',
-                                centerY: '50%',
-                                data: [{
-                                    name: '已用容量',
-                                    name2: '剩余容量'
-                                }, {
-                                    name: '剩余容量',
-                                    name2: '已用容量'
-                                }]
-                            }, {
-                                name: '饼图2',
-                                IS_CONCENTRIC: true,
-                                roseType: false,
-                                minRadius: '30%',
-                                maxRadius: '50%',
-                                centerX: '75%',
-                                centerY: '50%',
-                                data: [{
-                                    name: '已用容量',
-                                    name2: '剩余容量'
-                                }, {
-                                    name: '剩余容量',
-                                    name2: '已用容量'
-                                }]
-                            }]
+                            series: []
                         },
                         USE: 'FAKE_DATA',
 
@@ -123,7 +100,31 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                         updateInterval: 10000
                     };
 
+                    var seriesDefaults = [{
+                        name: '饼图1',
+                        pieType: '默认',
+                        roseType: false,
+                        minRadius: '0%',
+                        maxRadius: '50%',
+                        centerX: '25%',
+                        centerY: '50%',
+                        data: ['已用容量', '剩余容量']
+                    }, {
+                        name: '饼图2',
+                        pieType: '并列',
+                        roseType: false,
+                        minRadius: '30%',
+                        maxRadius: '50%',
+                        centerX: '75%',
+                        centerY: '50%',
+                        data: ['已用容量', '剩余容量']
+                    }];
+
                     _.defaultsDeep(_this.panel, panelDefaults);
+
+                    if (_this.panel.echartsOption.series.length == 0) {
+                        _.defaultsDeep(_this.panel.echartsOption.series, seriesDefaults);
+                    }
 
                     _this.events.on('data-received', _this.onDataReceived.bind(_this));
                     _this.events.on('data-error', _this.onDataError.bind(_this));
@@ -180,7 +181,6 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                 }, {
                     key: 'onDataReceived',
                     value: function onDataReceived(dataList) {
-
                         this.dataList = this.panel.USE === 'URL' ? this.UrlData : dataList;
 
                         if (this.panel.USE === 'FAKE_DATA' && this.panel.fakeData) {
@@ -188,7 +188,6 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                         }
 
                         this.data = this.translateData(this.dataList);
-                        console.log(this.data);
                         this.onRender();
                     }
                 }, {
@@ -241,11 +240,11 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                     key: 'addSeries',
                     value: function addSeries() {
                         this.panel.echartsOption.series.push({
-                            name: '',
-                            IS_CONCENTRIC: false,
+                            name: '饼图' + (this.panel.echartsOption.series.length + 1),
+                            pieType: '默认',
                             roseType: false,
                             minRadius: '0%',
-                            maxRadius: '55%',
+                            maxRadius: '60%',
                             centerX: '50%',
                             centerY: '50%',
                             data: []
@@ -255,10 +254,7 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                 }, {
                     key: 'addData',
                     value: function addData(dataArr) {
-                        dataArr.push({
-                            name: '',
-                            name2: ''
-                        });
+                        dataArr.push(this.data[0].name);
                         this.onRender();
                     }
                 }, {
@@ -278,21 +274,6 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                     key: 'link',
                     value: function link(scope, elem, attrs, ctrl) {
                         var $panelContainer = elem.find('.echarts_container')[0];
-
-                        ctrl.IS_DATA_CHANGED = true;
-
-                        function setHeight() {
-                            var height = ctrl.height || panel.height || ctrl.row.height;
-                            if (_.isString(height)) {
-                                height = parseInt(height.replace('px', ''), 10);
-                            }
-                            $panelContainer.style.height = height + 'px';
-                        }
-
-                        setHeight();
-
-                        var myChart = echarts.init($panelContainer, 'dark');
-                        myChart.resize();
 
                         // 防止重复触发事件
                         var callInterval = function callInterval() {
@@ -314,6 +295,21 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                             return func;
                         }();
 
+                        function setHeight() {
+                            var height = ctrl.height || panel.height || ctrl.row.height;
+                            if (_.isString(height)) {
+                                height = parseInt(height.replace('px', ''), 10);
+                            }
+                            $panelContainer.style.height = height + 'px';
+                        }
+
+                        setHeight();
+
+                        var myChart = echarts.init($panelContainer, 'dark');
+                        myChart.resize();
+
+                        ctrl.IS_DATA_CHANGED = true;
+
                         function render() {
                             if (!myChart) return;
 
@@ -330,10 +326,7 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                         text: ctrl.panel.echartsOption.title,
                                         subtext: ctrl.panel.echartsOption.subTitle,
                                         x: ctrl.panel.echartsOption.titleX,
-                                        y: ctrl.panel.echartsOption.titleY,
-                                        textStyle: {
-                                            // fontWeight: 'normal'
-                                        }
+                                        y: ctrl.panel.echartsOption.titleY
                                     },
                                     toolbox: {
                                         show: ctrl.panel.echartsOption.toolBoxShow,
@@ -359,8 +352,8 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                         data: getLegend()
                                     },
                                     series: getSeries()
-
                                 });
+
                                 var count = 0;
                                 callInterval(function () {
                                     myChart.dispatchAction({
@@ -370,7 +363,7 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                     myChart.dispatchAction({
                                         type: 'highlight',
                                         seriesIndex: 0,
-                                        dataIndex: count++ % 4
+                                        dataIndex: count++ % getSeries()[0].data.length
                                     });
                                 }, 2000);
                             }
@@ -378,94 +371,62 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
 
                         function getLegend() {
                             var legend = [];
-                            if (_.isArray(ctrl.data)) {
-                                for (var i = 0; i < ctrl.data.length; i++) {
-                                    legend.push(ctrl.data[i].name);
-                                }
-                            }
+
+                            ctrl.panel.echartsOption.series.forEach(function (series) {
+                                legend = _.uniq(legend.concat(series.data));
+                            });
+
                             return legend;
                         }
 
                         function getSeries() {
                             var seriesArr = [];
+                            var newSeries = [];
 
                             if (_.isArray(ctrl.data)) {
-                                ctrl.panel.echartsOption.series.forEach(function (series, index) {
-                                    if (!series.IS_CONCENTRIC) {
-                                        seriesArr.push({
-                                            name: series.name,
-                                            type: 'pie',
-                                            radius: [series.minRadius, series.maxRadius],
-                                            center: [series.centerX, series.centerY],
-                                            roseType: series.roseType,
-                                            data: getData(series.data, ctrl.data, series.IS_CONCENTRIC),
-                                            itemStyle: {
-                                                emphasis: {
-                                                    shadowBlur: 10,
-                                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                                }
+                                // 遍历保存的series
+                                ctrl.panel.echartsOption.series.forEach(function (series) {
+                                    //默认类型series
+                                    var defaultSeries = [{
+                                        name: series.name,
+                                        type: 'pie',
+                                        radius: [series.minRadius, series.maxRadius],
+                                        center: [series.centerX, series.centerY],
+                                        roseType: series.roseType,
+                                        data: getDefaultSeriesData(series.data, ctrl.data),
+                                        itemStyle: {
+                                            emphasis: {
+                                                shadowBlur: 10,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
                                             }
-                                        });
-                                    } else {
-                                        series.data.forEach(function (data, index) {
-                                            seriesArr.push({
-                                                name: series.name,
-                                                type: 'pie',
-                                                clockWise: false,
-                                                hoverAnimation: false,
-                                                radius: getRadius(index, series.minRadius, series.maxRadius),
-                                                center: [series.centerX, series.centerY],
-                                                data: getData([data], ctrl.data, series.IS_CONCENTRIC),
-                                                itemStyle: {
-                                                    emphasis: {
-                                                        shadowBlur: 10,
-                                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                                    }
-                                                }
-                                            });
-                                        });
-                                    }
+                                        }
+                                    }];
+                                    // 匹配声明的饼图类型
+                                    pieTypeArr.forEach(function (type, tIndex) {
+                                        // 如果匹配到了
+                                        if (series.pieType == type.name) {
+                                            // 赋值给newSeries
+                                            newSeries = pieTypeArr[tIndex].func(series, ctrl.data);
+                                        }
+                                    });
+                                    // 加入新series
+                                    seriesArr = seriesArr.concat(newSeries.length != 0 ? newSeries : defaultSeries);
                                 });
                             }
 
                             return seriesArr;
                         }
 
-                        function getRadius(index, min, max) {
-                            var reg = /%+/;
-                            var unit = reg.test(min) && reg.test(max) ? '%' : 0;
-                            var interval = (parseFloat(max) - parseFloat(min)) / ctrl.data.length;
-                            return [interval * index + parseFloat(min) + unit, interval * (index + 1) + parseFloat(min) + unit];
-                        }
-
-                        function getData(seriesData, allData, IS_CONCENTRIC) {
+                        //默认样式获取数据
+                        function getDefaultSeriesData(seriesData, allData) {
                             var newData = [];
 
                             if (_.isArray(seriesData) && _.isArray(allData)) {
-                                seriesData.forEach(function (m) {
-                                    allData.forEach(function (n) {
-                                        if (!IS_CONCENTRIC) {
-                                            if (m.name == n.name) {
-                                                newData.push(n);
-                                            }
-                                        } else {
-                                            if (m.name == n.name) newData[0] = n;
-                                            if (m.name2 == n.name) {
-                                                newData[1] = {
-                                                    name: '',
-                                                    value: n.value,
-                                                    itemStyle: {
-                                                        normal: {
-                                                            color: 'rgba(0,0,0,0)',
-                                                            label: { show: false },
-                                                            labelLine: { show: false }
-                                                        },
-                                                        emphasis: {
-                                                            color: 'rgba(0,0,0,0)'
-                                                        }
-                                                    }
-                                                };
-                                            }
+                                // 匹配数据名称
+                                seriesData.forEach(function (sData) {
+                                    allData.forEach(function (aData) {
+                                        if (sData == aData.name) {
+                                            newData.push(angular.copy(aData));
                                         }
                                     });
                                 });

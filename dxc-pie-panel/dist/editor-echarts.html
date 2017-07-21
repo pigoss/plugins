@@ -3,12 +3,14 @@
         <h5 class="section-heading">标题</h5>
         <div class="gf-form">
             <label class="gf-form-label width-8">标题</label>
-            <input type="text" class="input-small gf-form-input gf-form-input--grow" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.title" ng-model-onblur/>
+            <input type="text" class="input-small gf-form-input gf-form-input--grow" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.title"
+                ng-model-onblur/>
         </div>
 
         <div class="gf-form">
             <label class="gf-form-label width-8">副标题</label>
-            <input type="text" class="input-small gf-form-input gf-form-input--grow" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.subTitle" ng-model-onblur/>
+            <input type="text" class="input-small gf-form-input gf-form-input--grow" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.subTitle"
+                ng-model-onblur/>
         </div>
 
         <div class="gf-form">
@@ -16,14 +18,16 @@
             <tip>例：80%，center</tip>
           </label>
             <label class="gf-form-label gf-label-grow">x</label>
-            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.titleX" ng-change="ctrl.onRender()" ng-model-onblur />
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.titleX" ng-change="ctrl.onRender()"
+                ng-model-onblur />
             <label class="gf-form-label gf-label-grow">y</label>
-            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.titleY" ng-change="ctrl.onRender()" ng-model-onblur />
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.titleY" ng-change="ctrl.onRender()"
+                ng-model-onblur />
         </div>
     </div>
     <div class="section gf-form-group">
         <h5 class="section-heading">图例</h5>
-        <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="显示图例"  checked="ctrl.panel.echartsOption.legendShow"
+        <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="显示图例" checked="ctrl.panel.echartsOption.legendShow"
             on-change="ctrl.onRender()" switch-class="max-width-6"></gf-form-switch>
 
         <div class="gf-form">
@@ -37,9 +41,11 @@
         <div class="gf-form">
             <label class="gf-form-label width-8">位置<tip>例：80%，center</tip></label>
             <label class="gf-form-label ">X</label>
-            <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.legendLeft" ng-model-onblur/>
+            <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.legendLeft"
+                ng-model-onblur/>
             <label class="gf-form-label ">Y</label>
-            <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.legendTop" ng-model-onblur/>
+            <input type="text" class="input-small gf-form-input width-5" ng-change="ctrl.onRender()" ng-model="ctrl.panel.echartsOption.legendTop"
+                ng-model-onblur/>
         </div>
     </div>
 
@@ -47,7 +53,7 @@
         <h5 class="section-heading">工具栏</h5>
         <div class="gf-form">
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="显示工具栏" checked="ctrl.panel.echartsOption.toolBoxShow"
-              on-change="ctrl.onRender()"  switch-class="max-width-6"> </gf-form-switch>
+                on-change="ctrl.onRender()" switch-class="max-width-6"> </gf-form-switch>
         </div>
     </div>
 
@@ -59,7 +65,8 @@
                             <a ng-click="ctrl.remove(ctrl.panel.echartsOption.colorArr,$index)"><i class="pointer fa fa-remove">&nbsp;</i></a>
                             <spectrum-picker ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-model-onblur></spectrum-picker>
                         </label>
-                <input type="text" class="gf-form-input width-12" ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-blur="editor.render()" ng-model-onblur>
+                <input type="text" class="gf-form-input width-12" ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-blur="editor.render()"
+                    ng-model-onblur>
             </div>
         </div>
 

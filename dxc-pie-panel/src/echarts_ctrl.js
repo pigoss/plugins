@@ -4,6 +4,14 @@ import echarts from './libs/echarts.min';
 import './libs/echarts-liquidfill.min';
 import './libs/dark';
 import './style.css!';
+import { pieA } from './PieA';
+
+const pieTypeArr = [
+    {
+        name: '并列',
+        func: pieA
+    }
+];
 
 export class EchartsCtrl extends MetricsPanelCtrl {
 
@@ -17,50 +25,13 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 title: '主机容量',
                 subTitle: '',
                 titleX: 'center',
-                titleY: '',
+                titleY: '0%',
                 toolBoxShow: true,
                 legendShow: true,
                 legendOrient: 'vertical',
                 legendTop: '0%',
                 legendLeft: 'left',
-                series: [
-                    {
-                        name: '饼图1',
-                        IS_CONCENTRIC: false,
-                        roseType: false,
-                        minRadius: '0%',
-                        maxRadius: '50%',
-                        centerX: '25%',
-                        centerY: '50%',
-                        data: [
-                            {
-                                name: '已用容量',
-                                name2: '剩余容量'
-                            }, {
-                                name: '剩余容量',
-                                name2: '已用容量'
-                            }
-                        ]
-                    },
-                    {
-                        name: '饼图2',
-                        IS_CONCENTRIC: true,
-                        roseType: false,
-                        minRadius: '30%',
-                        maxRadius: '50%',
-                        centerX: '75%',
-                        centerY: '50%',
-                        data: [
-                            {
-                                name: '已用容量',
-                                name2: '剩余容量'
-                            }, {
-                                name: '剩余容量',
-                                name2: '已用容量'
-                            }
-                        ]
-                    }
-                ]
+                series: []
             },
             USE: 'FAKE_DATA',
 
@@ -70,7 +41,34 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             updateInterval: 10000
         };
 
+        const seriesDefaults = [
+            {
+                name: '饼图1',
+                pieType: '默认',
+                roseType: false,
+                minRadius: '0%',
+                maxRadius: '50%',
+                centerX: '25%',
+                centerY: '50%',
+                data: ['已用容量', '剩余容量']
+            },
+            {
+                name: '饼图2',
+                pieType: '并列',
+                roseType: false,
+                minRadius: '30%',
+                maxRadius: '50%',
+                centerX: '75%',
+                centerY: '50%',
+                data: ['已用容量', '剩余容量']
+            }
+        ];
+
         _.defaultsDeep(this.panel, panelDefaults);
+
+        if (this.panel.echartsOption.series.length == 0) {
+            _.defaultsDeep(this.panel.echartsOption.series, seriesDefaults);
+        }
 
         this.events.on('data-received', this.onDataReceived.bind(this));
         this.events.on('data-error', this.onDataError.bind(this));
@@ -116,8 +114,6 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     onDataReceived(dataList) {
-
-
         this.dataList = this.panel.USE === 'URL' ? this.UrlData : dataList;
 
         if (this.panel.USE === 'FAKE_DATA' && this.panel.fakeData) {
@@ -125,7 +121,6 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         }
 
         this.data = this.translateData(this.dataList);
-        console.log(this.data);
         this.onRender();
     }
 
@@ -157,7 +152,9 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.addEditorTab('数据配置', 'public/plugins/dxc-pie-panel/editer-metric.html', 2);
         this.addEditorTab('常规配置', 'public/plugins/dxc-pie-panel/editor-echarts.html', 3);
         this.addEditorTab('饼图配置', 'public/plugins/dxc-pie-panel/editor-pie.html', 4);
-    } addColor() {
+    }
+
+    addColor() {
         this.panel.echartsOption.colorArr.push('rgba(255, 255, 255, 1)');
         this.onRender();
     }
@@ -169,11 +166,11 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
     addSeries() {
         this.panel.echartsOption.series.push({
-            name: '',
-            IS_CONCENTRIC: false,
+            name: '饼图' + (this.panel.echartsOption.series.length + 1),
+            pieType: '默认',
             roseType: false,
             minRadius: '0%',
-            maxRadius: '55%',
+            maxRadius: '60%',
             centerX: '50%',
             centerY: '50%',
             data: []
@@ -182,10 +179,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     addData(dataArr) {
-        dataArr.push({
-            name: '',
-            name2: ''
-        });
+        dataArr.push(this.data[0].name);
         this.onRender();
     }
 
@@ -195,10 +189,11 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     getData() {
-        return _.map(this.data, function (data) {
-                return data.name;
-        });
+        return _.map(this.data, function (data) {
+            return data.name;
+        });
     }
+
     // invertColor() {
     //     this.panel.echartsOption.colorArr.reverse();
     //     this.onRender();
@@ -206,21 +201,6 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
     link(scope, elem, attrs, ctrl) {
         const $panelContainer = elem.find('.echarts_container')[0];
-
-        ctrl.IS_DATA_CHANGED = true;
-
-        function setHeight() {
-            let height = ctrl.height || panel.height || ctrl.row.height;
-            if (_.isString(height)) {
-                height = parseInt(height.replace('px', ''), 10);
-            }
-            $panelContainer.style.height = height + 'px';
-        }
-
-        setHeight();
-
-        let myChart = echarts.init($panelContainer, 'dark');
-        myChart.resize();
 
         // 防止重复触发事件
         var callInterval = function callInterval() {
@@ -242,6 +222,21 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             return func;
         }();
 
+        function setHeight() {
+            let height = ctrl.height || panel.height || ctrl.row.height;
+            if (_.isString(height)) {
+                height = parseInt(height.replace('px', ''), 10);
+            }
+            $panelContainer.style.height = height + 'px';
+        }
+
+        setHeight();
+
+        let myChart = echarts.init($panelContainer, 'dark');
+        myChart.resize();
+
+        ctrl.IS_DATA_CHANGED = true;
+
         function render() {
             if (!myChart) return;
 
@@ -258,10 +253,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                         text: ctrl.panel.echartsOption.title,
                         subtext: ctrl.panel.echartsOption.subTitle,
                         x: ctrl.panel.echartsOption.titleX,
-                        y: ctrl.panel.echartsOption.titleY,
-                        textStyle: {
-                            // fontWeight: 'normal'
-                        }
+                        y: ctrl.panel.echartsOption.titleY
                     },
                     toolbox: {
                         show: ctrl.panel.echartsOption.toolBoxShow,
@@ -286,10 +278,10 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                         left: ctrl.panel.echartsOption.legendLeft,
                         data: getLegend()
                     },
-                    series: getSeries(),
-
+                    series: getSeries()
                 });
-                var count = 0;
+
+                let count = 0;
                 callInterval(function () {
                     myChart.dispatchAction({
                         type: 'downplay',
@@ -298,7 +290,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
-                        dataIndex: (count++) % 4
+                        dataIndex: (count++) % getSeries()[0].data.length
                     });
                 }, 2000);
             }
@@ -306,94 +298,62 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
         function getLegend() {
             let legend = [];
-            if (_.isArray(ctrl.data)) {
-                for (let i = 0; i < ctrl.data.length; i++) {
-                    legend.push(ctrl.data[i].name);
-                }
-            }
+
+            ctrl.panel.echartsOption.series.forEach(series => {
+                legend = _.uniq(legend.concat(series.data));
+            });
+
             return legend;
         }
 
         function getSeries() {
             let seriesArr = [];
+            let newSeries = [];
 
             if (_.isArray(ctrl.data)) {
-                ctrl.panel.echartsOption.series.forEach(function (series, index) {
-                    if (!series.IS_CONCENTRIC) {
-                        seriesArr.push({
-                            name: series.name,
-                            type: 'pie',
-                            radius: [series.minRadius, series.maxRadius],
-                            center: [series.centerX, series.centerY],
-                            roseType: series.roseType,
-                            data: getData(series.data, ctrl.data, series.IS_CONCENTRIC),
-                            itemStyle: {
-                                emphasis: {
-                                    shadowBlur: 10,
-                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                }
+                // 遍历保存的series
+                ctrl.panel.echartsOption.series.forEach(series => {
+                    //默认类型series
+                    let defaultSeries = [{
+                        name: series.name,
+                        type: 'pie',
+                        radius: [series.minRadius, series.maxRadius],
+                        center: [series.centerX, series.centerY],
+                        roseType: series.roseType,
+                        data: getDefaultSeriesData(series.data, ctrl.data),
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
-                        });
-                    } else {
-                        series.data.forEach((data, index) => {
-                            seriesArr.push({
-                                name: series.name,
-                                type: 'pie',
-                                clockWise: false,
-                                hoverAnimation: false,
-                                radius: getRadius(index, series.minRadius, series.maxRadius),
-                                center: [series.centerX, series.centerY],
-                                data: getData([data], ctrl.data, series.IS_CONCENTRIC),
-                                itemStyle: {
-                                    emphasis: {
-                                        shadowBlur: 10,
-                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                    }
-                                }
-                            });
-                        });
-                    }
+                        }
+                    }];
+                    // 匹配声明的饼图类型
+                    pieTypeArr.forEach((type, tIndex) => {
+                        // 如果匹配到了
+                        if (series.pieType == type.name) {
+                            // 赋值给newSeries
+                            newSeries = pieTypeArr[tIndex].func(series, ctrl.data);
+                        }
+                    });
+                    // 加入新series
+                    seriesArr = seriesArr.concat(newSeries.length != 0 ? newSeries : defaultSeries);
                 });
             }
 
             return seriesArr;
         }
 
-        function getRadius(index, min, max) {
-            const reg = /%+/;
-            let unit = reg.test(min) && reg.test(max) ? '%' : 0;
-            let interval = (parseFloat(max) - parseFloat(min)) / ctrl.data.length;
-            return [(interval * index + parseFloat(min) + unit), (interval * (index + 1) + parseFloat(min) + unit)];
-        }
-
-        function getData(seriesData, allData, IS_CONCENTRIC) {
+        //默认样式获取数据
+        function getDefaultSeriesData(seriesData, allData) {
             let newData = [];
 
             if (_.isArray(seriesData) && _.isArray(allData)) {
-                seriesData.forEach(m => {
-                    allData.forEach(n => {
-                        if (!IS_CONCENTRIC) {
-                            if (m.name == n.name) {
-                                newData.push(n);
-                            }
-                        } else {
-                            if (m.name == n.name) newData[0] = n;
-                            if (m.name2 == n.name) {
-                                newData[1] = {
-                                    name: '',
-                                    value: n.value,
-                                    itemStyle: {
-                                        normal: {
-                                            color: 'rgba(0,0,0,0)',
-                                            label: { show: false },
-                                            labelLine: { show: false }
-                                        },
-                                        emphasis: {
-                                            color: 'rgba(0,0,0,0)'
-                                        }
-                                    }
-                                };
-                            }
+                // 匹配数据名称
+                seriesData.forEach(sData => {
+                    allData.forEach(aData => {
+                        if (sData == aData.name) {
+                            newData.push(angular.copy(aData));
                         }
                     });
                 });
