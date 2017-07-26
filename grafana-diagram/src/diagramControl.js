@@ -326,6 +326,7 @@ class DiagramCtrl extends MetricsPanelCtrl {
 		}
 		return graphDefinition;
 	}
+	
 	setValues(data) {
 		if (this.series && this.series.length > 0) {
 			for (var i = 0; i < this.series.length; i++) {
@@ -564,16 +565,9 @@ class DiagramCtrl extends MetricsPanelCtrl {
 			gradientValueMin.innerText = Math.min.apply(Math, ctrl.panel.thresholds.split(','));
 		}
 
-
-
 		function setElementHeight() {
 			//diagramContainer.css('height', ctrl.height + 'px');
 		}
-
-		this.events.on('render', function () {
-			render();
-			ctrl.renderingCompleted();
-		});
 
 		function updateStyle() {
 			var data = ctrl.svgData;
@@ -630,10 +624,12 @@ class DiagramCtrl extends MetricsPanelCtrl {
 						} else {
 							var dElement = d3.select(targetElement[0]);
 							// Add value text
-							var p = dElement.append('p');
-							p.classed('diagram-value');
-							p.style('background-color', seriesItem.color);
-							p.html(seriesItem.valueFormatted);
+							div.style('text-align', 'center');
+							var br = div.append('br');
+							var span = div.append('span');
+							span.classed('diagram-value', true);
+							span.style('background-color', seriesItem.color);
+							span.html(seriesItem.valueFormatted);
 						}
 					} else {
 						targetElement = $(svg).find('text:contains("' + key + '")'); // sequence diagram, gantt ?
@@ -652,6 +648,11 @@ class DiagramCtrl extends MetricsPanelCtrl {
 			}
 			//return $(svg).html();
 		} // End updateStyle()
+
+		this.events.on('render', function () {
+			render();
+			ctrl.renderingCompleted();
+		});
 	}
 	// End Class
 }

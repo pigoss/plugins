@@ -666,11 +666,6 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 							//diagramContainer.css('height', ctrl.height + 'px');
 						}
 
-						this.events.on('render', function () {
-							render();
-							ctrl.renderingCompleted();
-						});
-
 						function updateStyle() {
 							var data = ctrl.svgData;
 							ctrl.svgData = {}; // get rid of the data after consuming it. This prevents adding duplicate DOM elements
@@ -727,10 +722,12 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 										} else {
 											var dElement = d3.select(targetElement[0]);
 											// Add value text
-											var p = dElement.append('p');
-											p.classed('diagram-value');
-											p.style('background-color', seriesItem.color);
-											p.html(seriesItem.valueFormatted);
+											div.style('text-align', 'center');
+											var br = div.append('br');
+											var span = div.append('span');
+											span.classed('diagram-value', true);
+											span.style('background-color', seriesItem.color);
+											span.html(seriesItem.valueFormatted);
 										}
 									} else {
 										targetElement = $(svg).find('text:contains("' + key + '")'); // sequence diagram, gantt ?
@@ -749,6 +746,11 @@ System.register(['./libs/mermaid/dist/mermaidAPI', 'app/core/time_series2', 'app
 							}
 							//return $(svg).html();
 						} // End updateStyle()
+
+						this.events.on('render', function () {
+							render();
+							ctrl.renderingCompleted();
+						});
 					}
 				}]);
 
