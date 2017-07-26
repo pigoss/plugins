@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echarts-liquidfill.min', './libs/dark', './style.css!', './PieA'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echarts-liquidfill.min', './libs/dark', './style.css!', './PieA', './PieB'], function (_export, _context) {
     "use strict";
 
-    var MetricsPanelCtrl, _, echarts, pieA, _createClass, pieTypeArr, EchartsCtrl;
+    var MetricsPanelCtrl, _, echarts, pieA, pieB, _createClass, pieTypeArr, EchartsCtrl;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -44,6 +44,8 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
             echarts = _libsEchartsMin.default;
         }, function (_libsEchartsLiquidfillMin) {}, function (_libsDark) {}, function (_styleCss) {}, function (_PieA) {
             pieA = _PieA.pieA;
+        }, function (_PieB) {
+            pieB = _PieB.pieB;
         }],
         execute: function () {
             _createClass = function () {
@@ -67,6 +69,9 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
             pieTypeArr = [{
                 name: '并列',
                 func: pieA
+            }, {
+                name: '环形',
+                func: pieB
             }];
 
             _export('EchartsCtrl', EchartsCtrl = function (_MetricsPanelCtrl) {
@@ -83,13 +88,15 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                             colorArr: ['rgba(234,74,45,1)', '#FDB225', 'rgba(45,148,215,1)', '#16A59C', 'rgba(234,74,45,0.9)', '#b5c334'],
                             title: '主机容量',
                             subTitle: '',
-                            titleX: 'center',
-                            titleY: '0%',
+                            titleX: '65%',
+                            titleY: '20%',
                             toolBoxShow: true,
                             legendShow: true,
                             legendOrient: 'vertical',
-                            legendTop: '0%',
-                            legendLeft: 'left',
+                            legendTop: '65%',
+                            legendLeft: '65%',
+                            legendItemHeight: 8,
+                            legendItemWidth: 8,
                             series: []
                         },
                         USE: 'FAKE_DATA',
@@ -102,20 +109,11 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
 
                     var seriesDefaults = [{
                         name: '饼图1',
-                        pieType: '默认',
+                        pieType: '环形',
                         roseType: false,
-                        minRadius: '0%',
-                        maxRadius: '50%',
-                        centerX: '25%',
-                        centerY: '50%',
-                        data: ['已用容量', '剩余容量']
-                    }, {
-                        name: '饼图2',
-                        pieType: '并列',
-                        roseType: false,
-                        minRadius: '30%',
-                        maxRadius: '50%',
-                        centerX: '75%',
+                        minRadius: '50%',
+                        maxRadius: '70%',
+                        centerX: '30%',
                         centerY: '50%',
                         data: ['已用容量', '剩余容量']
                     }];
@@ -241,11 +239,11 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                     value: function addSeries() {
                         this.panel.echartsOption.series.push({
                             name: '饼图' + (this.panel.echartsOption.series.length + 1),
-                            pieType: '默认',
+                            pieType: '环形',
                             roseType: false,
-                            minRadius: '0%',
-                            maxRadius: '60%',
-                            centerX: '50%',
+                            minRadius: '50%',
+                            maxRadius: '70%',
+                            centerX: '30%',
                             centerY: '50%',
                             data: []
                         });
@@ -352,6 +350,8 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                         orient: ctrl.panel.echartsOption.legendOrient,
                                         top: ctrl.panel.echartsOption.legendTop,
                                         left: ctrl.panel.echartsOption.legendLeft,
+                                        itemWidth: ctrl.panel.echartsOption.legendItemWidth,
+                                        itemHeight: ctrl.panel.echartsOption.legendItemHeight,
                                         data: getLegend()
                                     },
                                     series: getSeries()

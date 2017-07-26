@@ -5,11 +5,14 @@ import './libs/echarts-liquidfill.min';
 import './libs/dark';
 import './style.css!';
 import { pieA } from './PieA';
-
+import { pieB } from './PieB';
 const pieTypeArr = [
     {
         name: '并列',
         func: pieA
+    }, {
+        name: '环形',
+        func: pieB
     }
 ];
 
@@ -24,13 +27,15 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 colorArr: ['rgba(234,74,45,1)', '#FDB225', 'rgba(45,148,215,1)', '#16A59C', 'rgba(234,74,45,0.9)', '#b5c334'],
                 title: '主机容量',
                 subTitle: '',
-                titleX: 'center',
-                titleY: '0%',
+                titleX: '65%',
+                titleY: '20%',
                 toolBoxShow: true,
                 legendShow: true,
                 legendOrient: 'vertical',
-                legendTop: '0%',
-                legendLeft: 'left',
+                legendTop: '65%',
+                legendLeft: '65%',
+                legendItemHeight:8,
+                legendItemWidth:8,
                 series: []
             },
             USE: 'FAKE_DATA',
@@ -44,21 +49,11 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         const seriesDefaults = [
             {
                 name: '饼图1',
-                pieType: '默认',
+                pieType: '环形',
                 roseType: false,
-                minRadius: '0%',
-                maxRadius: '50%',
-                centerX: '25%',
-                centerY: '50%',
-                data: ['已用容量', '剩余容量']
-            },
-            {
-                name: '饼图2',
-                pieType: '并列',
-                roseType: false,
-                minRadius: '30%',
-                maxRadius: '50%',
-                centerX: '75%',
+                minRadius: '50%',
+                maxRadius: '70%',
+                centerX: '30%',
                 centerY: '50%',
                 data: ['已用容量', '剩余容量']
             }
@@ -167,12 +162,12 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     addSeries() {
         this.panel.echartsOption.series.push({
             name: '饼图' + (this.panel.echartsOption.series.length + 1),
-            pieType: '默认',
+            pieType: '环形',
             roseType: false,
-            minRadius: '0%',
-            maxRadius: '60%',
-            centerX: '50%',
-            centerY: '50%',
+             minRadius: '50%',
+                maxRadius: '70%',
+                centerX: '30%',
+                centerY: '50%',
             data: []
         });
 
@@ -279,6 +274,8 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                         orient: ctrl.panel.echartsOption.legendOrient,
                         top: ctrl.panel.echartsOption.legendTop,
                         left: ctrl.panel.echartsOption.legendLeft,
+                        itemWidth: ctrl.panel.echartsOption.legendItemWidth,
+		itemHeight: ctrl.panel.echartsOption.legendItemHeight,
                         data: getLegend()
                     },
                     series: getSeries()
