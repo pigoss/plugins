@@ -175,6 +175,9 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             centerY: '50%',
             data: []
         });
+
+        this.subTabIndex = this.panel.echartsOption.series.length - 1;
+
         this.onRender();
     }
 
@@ -308,12 +311,12 @@ export class EchartsCtrl extends MetricsPanelCtrl {
 
         function getSeries() {
             let seriesArr = [];
-            let newSeries = [];
 
             if (_.isArray(ctrl.data)) {
                 // 遍历保存的series
                 ctrl.panel.echartsOption.series.forEach(series => {
                     //默认类型series
+                    let newSeries = [];
                     let defaultSeries = [{
                         name: series.name,
                         type: 'pie',

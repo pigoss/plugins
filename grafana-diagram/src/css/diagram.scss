@@ -36,7 +36,7 @@ $task-fill: #BDD5EA;
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  border: 1px solid transparent;
+  border: 3px solid transparent;
 }
 
 .diagram g.label img.red {
@@ -45,12 +45,12 @@ $task-fill: #BDD5EA;
 
 @keyframes i_red {
   0% {
-		border: 1px solid rgba(245, 54, 54, 0.9);
+		border-color: rgba(245, 54, 54, 0.4);
     box-shadow: 0 0 5px rgba(245, 54, 54, 0.2), inset 0 0 5px rgba(245, 54, 54, 0.1), 0 2px 0 #000;
   }
   100% {
-		border: 1px solid rgba(245, 54, 54, 0.9);
-    box-shadow: 0 0 20px rgba(245, 54, 54, 0.9), inset 0 0 10px rgba(245, 54, 54, 0.6), 0 2px 0 #000;
+		border-color: rgba(245, 54, 54, 0.9);
+    box-shadow: 0 0 16px rgba(245, 54, 54, 0.9), inset 0 0 10px rgba(245, 54, 54, 0.6), 0 2px 0 #000;
   }
 }
 
@@ -60,12 +60,12 @@ $task-fill: #BDD5EA;
 
 @keyframes i_yellow {
   0% {
-		border: 1px solid rgba(237, 129, 40, 0.89);
+		border-color: rgba(237, 129, 40, 0.39);
     box-shadow: 0 0 5px rgba(237, 129, 40, 0.19), inset 0 0 5px rgba(237, 129, 40, 0.09), 0 2px 0 #000;
   }
   100% {
-		border: 1px solid rgba(237, 129, 40, 0.89);
-    box-shadow: 0 0 20px rgba(237, 129, 40, 0.89), inset 0 0 10px rgba(237, 129, 40, 0.59), 0 2px 0 #000;
+		border-color: rgba(237, 129, 40, 0.89);
+    box-shadow: 0 0 16px rgba(237, 129, 40, 0.89), inset 0 0 10px rgba(237, 129, 40, 0.59), 0 2px 0 #000;
   }
 }
 
@@ -75,12 +75,12 @@ $task-fill: #BDD5EA;
 
 @keyframes i_green {
   0% {
-		border: 1px solid rgba(50, 172, 45, 0.97);
+		border-color: rgba(50, 172, 45, 0.47);
     box-shadow: 0 0 5px rgba(50, 172, 45, 0.27), inset 0 0 5px rgba(50, 172, 45, 0.17), 0 2px 0 #000;
   }
   100% {
-		border: 1px solid rgba(50, 172, 45, 0.97);
-    box-shadow: 0 0 20px rgba(50, 172, 45, 0.97), inset 0 0 10px rgba(50, 172, 45, 0.67), 0 2px 0 #000;
+		border-color: rgba(50, 172, 45, 0.97);
+    box-shadow: 0 0 16px rgba(50, 172, 45, 0.97), inset 0 0 10px rgba(50, 172, 45, 0.67), 0 2px 0 #000;
   }
 }
 

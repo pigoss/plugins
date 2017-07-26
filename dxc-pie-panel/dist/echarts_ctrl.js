@@ -249,6 +249,9 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                             centerY: '50%',
                             data: []
                         });
+
+                        this.subTabIndex = this.panel.echartsOption.series.length - 1;
+
                         this.onRender();
                     }
                 }, {
@@ -381,12 +384,12 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
 
                         function getSeries() {
                             var seriesArr = [];
-                            var newSeries = [];
 
                             if (_.isArray(ctrl.data)) {
                                 // 遍历保存的series
                                 ctrl.panel.echartsOption.series.forEach(function (series) {
                                     //默认类型series
+                                    var newSeries = [];
                                     var defaultSeries = [{
                                         name: series.name,
                                         type: 'pie',
