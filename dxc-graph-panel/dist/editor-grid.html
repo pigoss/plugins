@@ -1,0 +1,42 @@
+<div class="editor-row">
+    <div class="section gf-form-group">
+        <h5 class="section-heading">直角坐标系边距
+            <tip>组件距容器各侧的距离。例：20%</tip>
+        </h5>
+        <div class="gf-form">
+            <label class="gf-form-label width-8">上边距</label>
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.gridTop" ng-change="ctrl.onRender()"
+                ng-model-onblur />
+                     <label class="gf-form-label width-8">下边距</label>
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.gridBottom" ng-change="ctrl.onRender()"
+                ng-model-onblur />
+        </div>
+             <div class="gf-form">
+            <label class="gf-form-label width-8">左边距</label>
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.gridLeft" ng-change="ctrl.onRender()"
+                ng-model-onblur />
+            <label class="gf-form-label width-8">右边距</label>
+            <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.gridRight" ng-change="ctrl.onRender()"
+                ng-model-onblur />
+       
+        </div>
+    </div>
+    <div class="section gf-form-group">
+        <h5 class="section-heading">X轴</h5>
+        <div class="gf-form">
+            <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="显示 X 轴" checked="ctrl.panel.echartsOption.xAxisShow"
+                on-change="ctrl.onRender()" switch-class="max-width-6"> </gf-form-switch>
+        </div>
+            <div class="gf-form" ng-if="ctrl.panel.echartsOption.xAxisShow">
+                 <label class="gf-form-label width-8">单位</label>
+                <input type="text" class="input-small gf-form-input width-5" ng-model="ctrl.panel.echartsOption.xAxisName" ng-change="ctrl.onRender()"
+                ng-model-onblur />
+            </div>
+        <div class="gf-form"  ng-if="ctrl.panel.echartsOption.xAxisShow">
+            <label class="gf-form-label width-8">类型</label>
+            <select class="gf-form-input gf-from-input--grow" ng-model="ctrl.panel.echartsOption.xAxisType" ng-options="c.value as c.text for c in [{value: 'value',text: '数值轴'},{value: 'category',text: '类目轴'},{value: 'time',text: '时间轴'},{value: 'log',text: '对数轴'}]"
+                ng-change="ctrl.onRender()"></select>
+            <tip>数值轴，适用于连续数据;类目轴，适用于离散的类目数据; 时间轴，适用于连续的时序数据; 对数轴。适用于对数数据。</tip>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "name": "dxc-graph-panel",
+  "description": "Echarts panel for grafana by DXC Technology",
+  "main": "src/main.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+  }
+}

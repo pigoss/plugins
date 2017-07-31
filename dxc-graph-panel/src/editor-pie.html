@@ -1,0 +1,37 @@
+<div class="edit-tab-with-sidemenu">
+    <aside class="edit-sidemenu-aside">
+        <ul class="edit-sidemenu">
+            <li ng-repeat="series in ctrl.panel.echartsOption.series" ng-class="{active: ctrl.subTabIndex === $index}">
+                <a ng-click="ctrl.subTabIndex  = $index">{{series.name||'新图'}}</a>
+            </li>
+            <li>
+                <a class="pointer" ng-click="ctrl.addSeries()"><i class="fa fa-plus"></i>&nbsp;</a>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="edit-tab-content" ng-repeat="series in ctrl.panel.echartsOption.series" ng-if="ctrl.subTabIndex === $index">
+        <div class="editor-row">
+            <div class="section gf-form-group">
+                <h5 class="section-heading">添加数据</h5>
+                <div class="gf-form">
+                  
+                        <div class="gf-form">
+                            <select class="gf-form-input width-8" ng-options="d for d in ctrl.getData()" ng-model="series.name" ng-change="ctrl.onRender()"></select>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="editor-row">
+            <div class="section gf-form-group">
+                <h5 class="section-heading">样式配置</h5>
+               
+            </div>
+            <div class="clearfix"></div>
+            <button class="btn btn-danger btn-small" ng-click="ctrl.remove(ctrl.panel.echartsOption.series,$index)">
+                <i class="fa fa-trash"></i> 移除饼图
+            </button>
+        </div>
+    </div>
+</div>

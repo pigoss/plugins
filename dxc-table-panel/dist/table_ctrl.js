@@ -193,7 +193,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
           value: function onDataReceived(dataList) {
             this.dataRaw = dataList;
             this.pageIndex = 0;
-
+            console.log(dataList);
             // automatically correct transform mode based on data
             if (this.dataRaw && this.dataRaw.length) {
               if (this.dataRaw[0].type === 'table') {

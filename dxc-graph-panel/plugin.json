@@ -1,0 +1,16 @@
+{
+  "type": "panel",
+  "name": "图",
+  "id": "dxc-graph-panel",
+
+  "info": {
+    "description": "Echarts panel for grafana by DXC Technology",
+    "keywords": ["Echarts", "graph", "panel"],
+    "version": "1.0.0"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "4.1.x",
+    "plugins": [ ]
+  }
+}
