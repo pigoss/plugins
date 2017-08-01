@@ -41,8 +41,19 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 gridLeft: '7%',
                 gridRight: '7%',
                 xAxisShow: true,
-                xAxisType: 'category',
                 xAxisName: '',
+                xAxisLineShow: true,
+                xAxisLineColor: 'rgba(255,255,255,0.8)',
+                xAxisTickShow: true,
+                xAxisTickAlign: true,
+                xSplitLineShow:false,
+                yAxisShow: true,
+                yAxisName: '',
+                yAxisLineShow: true,
+                yAxisLineColor: 'rgba(255,255,255,0.8)',
+                yAxisTickShow: true,
+                yAxisTickAlign: true,
+                ySplitLineShow:false,
                 line: [],
                 series: []
             },
@@ -113,7 +124,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     }
 
     onDataReceived(dataList) {
-       
+
         this.dataList = this.panel.USE === 'URL' ? this.UrlData : dataList;
 
         if (this.panel.USE === 'FAKE_DATA' && this.panel.fakeData) {
@@ -121,7 +132,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         }
 
         this.data = this.translateData(this.dataList);
-         console.log(this.data);
+        console.log(this.data);
         this.onRender();
     }
 
@@ -154,7 +165,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.addEditorTab('数据配置', 'public/plugins/dxc-graph-panel/editer-metric.html', 2);
         this.addEditorTab('常规配置', 'public/plugins/dxc-graph-panel/editor-echarts.html', 3);
         this.addEditorTab('直角坐标系配置', 'public/plugins/dxc-graph-panel/editor-grid.html', 4);
-        this.addEditorTab('饼图配置', 'public/plugins/dxc-graph-panel/editor-pie.html', 5);
+        this.addEditorTab('柱形图配置', 'public/plugins/dxc-graph-panel/editor-graph.html', 5);
     }
 
     addColor() {
@@ -291,13 +302,62 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                     xAxis: [{
                         name: ctrl.panel.echartsOption.xAxisName,
                         show: ctrl.panel.echartsOption.xAxisShow,
-                        type: ctrl.panel.echartsOption.xAxisType,
+                        axisLine: {
+                            show: ctrl.panel.echartsOption.xAxisLineShow,
+                            lineStyle: {
+                                color: ctrl.panel.echartsOption.xAxisLineColor,
+                            },
+                        },
+                        axisTick: {
+                            show: ctrl.panel.echartsOption.xAxisTickShow,
+                            alignWithLabel: ctrl.panel.echartsOption.xAxisTickAlign,
+                            lineStyle: {
+                                color: ctrl.panel.echartsOption.xAxisLineColor,
+                            },
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: ctrl.panel.echartsOption.xAxisLineColor,
+                            }
+                        },
+                           splitLine:{
+                             show: ctrl.panel.echartsOption.xSplitLineShow,
+                             lineStyle: {
+                                color: ctrl.panel.echartsOption.xAxisLineColor,
+                            }
+                             },
                         data: getLine()
                     }],
-                    yAxis: [
-                        {
-                        }
-                    ],
+                    yAxis: [{
+                        name: ctrl.panel.echartsOption.yAxisName,
+                        show: ctrl.panel.echartsOption.yAxisShow,
+                        axisLine: {
+                            show: ctrl.panel.echartsOption.yAxisLineShow,
+                            lineStyle: {
+                                color: ctrl.panel.echartsOption.yAxisLineColor,
+                            }
+                        },
+                        axisTick: {
+                            show: ctrl.panel.echartsOption.yAxisTickShow,
+                            alignWithLabel: ctrl.panel.echartsOption.yAxisTickAlign,
+                            lineStyle: {
+                                color: ctrl.panel.echartsOption.yAxisLineColor,
+                            },
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: ctrl.panel.echartsOption.xAxisLineColor,
+                            }
+                        },
+                        splitLine:{
+                             show: ctrl.panel.echartsOption.ySplitLineShow,
+                             lineStyle: {
+                                color: ctrl.panel.echartsOption.yAxisLineColor,
+                            }
+                             },
+                        // data: getLine()
+                    }],
+
                     series: getSeries()
                 });
 
@@ -340,8 +400,8 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                     // let newSeries = [];
                     let defaultSeries = [{
                         name: series.name,
-                        type: 'bar',
-                        data: getDefaultSeriesData(series.name, ctrl.data) 
+                        type: 'line',
+                        data: getDefaultSeriesData(series.name, ctrl.data)
                     }];
                     // // 匹配声明的饼图类型
                     // pieTypeArr.forEach((type, tIndex) => {
@@ -365,16 +425,16 @@ export class EchartsCtrl extends MetricsPanelCtrl {
             let newData = [];
             // 匹配所有数据
             if (_.isArray(ctrlData)) {
-                    ctrlData.forEach(cData => {
-                        // 如果相等
-                        if (seriesName == cData.name) {
-                            // 复制到newData，遍历结束后newData便包含当前series的所有数据
-                              
-                          newData=angular.copy(cData.value);
-                            console.log(newData);
-                        }
-                    });
-            
+                ctrlData.forEach(cData => {
+                    // 如果相等
+                    if (seriesName == cData.name) {
+                        // 复制到newData，遍历结束后newData便包含当前series的所有数据
+
+                        newData = angular.copy(cData.value);
+                        console.log(newData);
+                    }
+                });
+
             }
             return newData;
         }
