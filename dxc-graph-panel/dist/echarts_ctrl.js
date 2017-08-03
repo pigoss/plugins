@@ -107,7 +107,6 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                             series: []
                         },
                         USE: 'FAKE_DATA',
-
                         fakeData: '[{"name":"容量","columns":["time","last","last_1"],"values":[490,1399,1657]},{"name":"内存","values":[1920,199,67]}]',
                         url: '',
                         request: '',
@@ -117,7 +116,10 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                     var seriesDefaults = [{
                         name: '图形1',
                         type: 'bar',
-                        barWidth: '60%',
+                        barWidth: '',
+                        stack: '',
+                        symbol: '',
+                        symbolSize: '',
                         data: []
                     }];
 
@@ -247,7 +249,6 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                         this.panel.echartsOption.series.push({
                             name: this.panel.echartsOption.series.name,
                             type: 'bar',
-                            barWidth: '60%',
                             data: []
                         });
 
@@ -458,7 +459,11 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                     // let newSeries = [];
                                     var defaultSeries = [{
                                         name: series.name,
-                                        type: 'line',
+                                        type: series.type,
+                                        barWidth: series.barWidth,
+                                        stack: series.stack,
+                                        symbol: series.symbol,
+                                        symbolSize: series.symbolSize,
                                         data: getDefaultSeriesData(series.name, ctrl.data)
                                     }];
                                     // // 匹配声明的饼图类型
