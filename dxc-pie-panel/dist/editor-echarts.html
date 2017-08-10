@@ -62,7 +62,7 @@
         <div class="gf-form" ng-repeat="color in ctrl.panel.echartsOption.colorArr track by $index">
             <div class="gf-form-inline">
                 <label class="gf-form-label">
-                            <a ng-click="ctrl.removeColor($index)"><i class="pointer fa fa-remove">&nbsp;</i></a>
+                            <a ng-click="ctrl.remove(ctrl.panel.echartsOption.colorArr,$index)"><i class="pointer fa fa-remove">&nbsp;</i></a>
                             <spectrum-picker ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-model-onblur></spectrum-picker>
                         </label>
                 <input type="text" class="gf-form-input width-12" ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-blur="editor.render()"

@@ -235,9 +235,9 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                         this.onRender();
                     }
                 }, {
-                    key: 'removeColor',
-                    value: function removeColor(index) {
-                        this.panel.echartsOption.colorArr.splice(index, 1);
+                    key: 'remove',
+                    value: function remove(obj, index) {
+                        obj.splice(index, 1);
                         this.onRender();
                     }
                 }, {
