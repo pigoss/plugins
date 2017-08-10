@@ -3,7 +3,11 @@ import { MetricsPanelCtrl } from 'app/plugins/sdk';
 
 
 const panelDefaults = {
-
+    fakedata:'',
+ url: '',
+  USE: 'FAKE_DATA',
+  request: '',
+  updateInterval: 10000
 };
 
 export class TreeCtrl extends MetricsPanelCtrl {

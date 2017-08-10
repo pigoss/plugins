@@ -60,7 +60,13 @@ System.register(['lodash', 'app/plugins/sdk'], function (_export, _context) {
                 };
             }();
 
-            panelDefaults = {};
+            panelDefaults = {
+                fakedata: '',
+                url: '',
+                USE: 'FAKE_DATA',
+                request: '',
+                updateInterval: 10000
+            };
 
             _export('TreeCtrl', TreeCtrl = function (_MetricsPanelCtrl) {
                 _inherits(TreeCtrl, _MetricsPanelCtrl);
