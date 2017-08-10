@@ -159,6 +159,11 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.onRender();
     }
 
+     remove(obj, index) {
+        obj.splice(index, 1);
+        this.onRender();
+    }
+
     addSeries() {
         this.panel.echartsOption.series.push({
             name: '饼图' + (this.panel.echartsOption.series.length + 1),
@@ -181,10 +186,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
         this.onRender();
     }
 
-    remove(obj, index) {
-        obj.splice(index, 1);
-        this.onRender();
-    }
+   
 
     getData() {
         return _.map(this.data, function (data) {
