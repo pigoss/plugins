@@ -27,7 +27,12 @@
             <div class="section gf-form-group">
                 <h5 class="section-heading">样式配置</h5>
                 <div class="gf-form">
-                    <label class="gf-form-label width-8">类型</label>
+                    <gf-form-switch class="gf-form max-width-30" label-class="width-6" label="动效" checked="series.animationShow" on-change="ctrl.onRender()"
+                        switch-class="max-width-8">
+                    </gf-form-switch>
+                </div>
+                <div class="gf-form">
+                    <label class="gf-form-label width-6">类型</label>
                     <div class="gf-form-select-wrapper max-width-8">
                         <select class="gf-form-input gf-from-input--grow" ng-model="series.type" ng-options="c.value as c.text for c in [{value: 'bar',text: '柱形图'},{value: 'line',text: '折线图'}]"
                             ng-change="ctrl.onRender()"></select>
@@ -35,23 +40,53 @@
                 </div>
                 <div class="gf-form" ng-if="series.type==='bar'">
                     <label class="gf-form-label gf-label-grow">柱条宽度<tip>例：80%</tip></label>
-                    <input type="text" class="input-small gf-form-input width-5" ng-model="series.barWidth" ng-change="ctrl.onRender()" ng-model-onblur
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.barWidth" ng-change="ctrl.onRender()" ng-model-onblur
                     />
                 </div>
                 <div class="gf-form" ng-if="series.type==='bar'">
                     <label class="gf-form-label gf-label-grow">堆叠效果<tip>同个轴上系列配置相同的值可以堆叠放置</tip></label>
-                    <input type="text" class="input-small gf-form-input width-5" ng-model="series.stack" ng-change="ctrl.onRender()" ng-model-onblur
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.stack" ng-change="ctrl.onRender()" ng-model-onblur
+                    />
+                </div>
+
+                <div class="gf-form" ng-if="series.type==='line'">
+                    <gf-form-switch class="gf-form max-width-30" label-class="width-6" label="平滑曲线" checked="series.smooth" on-change="ctrl.onRender()"
+                        switch-class="max-width-8">
+                    </gf-form-switch>
+                </div>
+                <div class="gf-form" ng-if="series.type==='line'">
+                    <gf-form-switch class="gf-form max-width-30" label-class="width-6" label="阶梯线图" checked="series.step" on-change="ctrl.onRender()"
+                        switch-class="max-width-8">
+                    </gf-form-switch>
+                </div>
+                <div class="gf-form" ng-if="series.type==='line'">
+                    <label class="gf-form-label width-6">标记<tip>例： 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'。也可以通过 'image://url' 设置为图片，其中 url 为图片的链接；通过 'path://' 将图标设置为任意的矢量路径。</tip></label>
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.symbol" ng-change="ctrl.onRender()" ng-model-onblur
                     />
                 </div>
                 <div class="gf-form" ng-if="series.type==='line'">
-                    <label class="gf-form-label gf-label-grow">标记<tip>例： 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'。也可以通过 'image://url' 设置为图片，其中 url 为图片的链接；通过 'path://' 将图标设置为任意的矢量路径。</tip></label>
-                    <input type="text" class="input-small gf-form-input width-5" ng-model="series.symbol" ng-change="ctrl.onRender()" ng-model-onblur
+                    <label class="gf-form-label width-6">标记大小</label>
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.symbolSize" ng-change="ctrl.onRender()" ng-model-onblur
                     />
                 </div>
-                 <div class="gf-form" ng-if="series.type==='line'">
-                    <label class="gf-form-label gf-label-grow">标记大小</label>
-                    <input type="text" class="input-small gf-form-input width-5" ng-model="series.symbolSize" ng-change="ctrl.onRender()" ng-model-onblur
-                    />
+            </div>
+            <div class="section gf-form-group">
+                <h5 class="section-heading">提示</h5>
+                <div class="gf-form">
+                    <gf-form-switch class="gf-form max-width-30" label-class="width-6" label="标签" checked="series.labelShow" on-change="ctrl.onRender()"
+                        switch-class="max-width-8">
+                    </gf-form-switch>
+
+                </div>
+                <div class="gf-form" ng-if="series.labelShow">
+                    <label class="gf-form-label gf-label-grow">标签位置<tip>可选填：[x, y]；top，left，right，bottom，inside，insideLef，insideRight，insideTop，insideBottom，insideTopLeft，insideBottomLeft，insideTopRight，insideBottomRight</tip></label>
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.labelPosition" ng-change="ctrl.onRender()"
+                        ng-model-onblur />
+                </div>
+                <div class="gf-form" ng-if="series.labelShow">
+                    <label class="gf-form-label gf-label-grow">标签内容<tip>{a}表示图形名，{b}表示数据名，{c}表示数据值</tip></label>
+                    <input type="text" class="input-small gf-form-input width-8" ng-model="series.labelFormatter" ng-change="ctrl.onRender()"
+                        ng-model-onblur />
                 </div>
             </div>
             <div class="clearfix"></div>

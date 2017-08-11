@@ -120,6 +120,12 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                         stack: '',
                         symbol: '',
                         symbolSize: '',
+                        labelShow: false,
+                        animationShow: true,
+                        labelPosition: 'inside',
+                        labelFormatter: '{c}',
+                        smooth: '',
+                        step: '',
                         data: []
                     }];
 
@@ -464,6 +470,16 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/echa
                                         stack: series.stack,
                                         symbol: series.symbol,
                                         symbolSize: series.symbolSize,
+                                        label: {
+                                            normal: {
+                                                show: series.labelShow,
+                                                position: series.labelPosition,
+                                                formatter: series.labelFormatter
+                                            }
+                                        },
+                                        smooth: series.smooth,
+                                        step: series.step,
+                                        animation: series.animationShow,
                                         data: getDefaultSeriesData(series.name, ctrl.data)
                                     }];
                                     // // 匹配声明的饼图类型

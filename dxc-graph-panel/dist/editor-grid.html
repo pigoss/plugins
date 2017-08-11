@@ -1,4 +1,3 @@
-
 <div class="editor-row">
     <div class="section gf-form-group">
         <h5 class="section-heading">X轴</h5>
@@ -20,16 +19,16 @@
             <input type="text" class="gf-form-input width-12" ng-model="ctrl.panel.echartsOption.xAxisLineColor" ng-change="ctrl.onRender()"
                 ng-blur="editor.render()" ng-model-onblur>
         </div>
-              <div class="gf-form" ng-if="ctrl.panel.echartsOption.xAxisShow">
+        <div class="gf-form" ng-if="ctrl.panel.echartsOption.xAxisShow">
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="刻度" checked="ctrl.panel.echartsOption.xAxisTickShow"
                 on-change="ctrl.onRender()" switch-class="max-width-8"> </gf-form-switch>
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="刻度线对齐" checked="ctrl.panel.echartsOption.xAxisTickAlign"
                 on-change="ctrl.onRender()" ng-if="ctrl.panel.echartsOption.xAxisTickShow" switch-class="max-width-8"> </gf-form-switch>
         </div>
-              <div class="gf-form" ng-if="ctrl.panel.echartsOption.xAxisShow">
+        <div class="gf-form" ng-if="ctrl.panel.echartsOption.xAxisShow">
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="分割线" checked="ctrl.panel.echartsOption.xSplitLineShow"
                 on-change="ctrl.onRender()" switch-class="max-width-8"> </gf-form-switch>
-          
+
         </div>
     </div>
     <div class="section gf-form-group ">
@@ -58,10 +57,10 @@
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="刻度线对齐" checked="ctrl.panel.echartsOption.yAxisTickAlign"
                 on-change="ctrl.onRender()" ng-if="ctrl.panel.echartsOption.yAxisTickShow" switch-class="max-width-8"> </gf-form-switch>
         </div>
-   <div class="gf-form" ng-if="ctrl.panel.echartsOption.yAxisShow">
+        <div class="gf-form" ng-if="ctrl.panel.echartsOption.yAxisShow">
             <gf-form-switch class="gf-form max-width-30" label-class="width-8" label="分割线" checked="ctrl.panel.echartsOption.ySplitLineShow"
                 on-change="ctrl.onRender()" switch-class="max-width-8"> </gf-form-switch>
-          
+
         </div>
 
     </div>

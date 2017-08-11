@@ -46,14 +46,14 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 xAxisLineColor: 'rgba(255,255,255,0.8)',
                 xAxisTickShow: true,
                 xAxisTickAlign: true,
-                xSplitLineShow:false,
+                xSplitLineShow: false,
                 yAxisShow: true,
                 yAxisName: '',
                 yAxisLineShow: true,
                 yAxisLineColor: 'rgba(255,255,255,0.8)',
                 yAxisTickShow: true,
                 yAxisTickAlign: true,
-                ySplitLineShow:false,
+                ySplitLineShow: false,
                 line: [],
                 series: []
             },
@@ -69,9 +69,15 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                 name: '图形1',
                 type: 'bar',
                 barWidth: '',
-                stack:'',
-                symbol:'',
-                symbolSize:'',
+                stack: '',
+                symbol: '',
+                symbolSize: '',
+                labelShow: false,
+                animationShow: true,
+                labelPosition: 'inside',
+                labelFormatter: '{c}',
+                smooth:'',
+                step:'',
                 data: []
             }
         ];
@@ -183,7 +189,7 @@ export class EchartsCtrl extends MetricsPanelCtrl {
     addSeries() {
         this.panel.echartsOption.series.push({
             name: this.panel.echartsOption.series.name,
-            type:'bar',
+            type: 'bar',
             data: []
         });
 
@@ -321,12 +327,12 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                                 color: ctrl.panel.echartsOption.xAxisLineColor,
                             }
                         },
-                           splitLine:{
-                             show: ctrl.panel.echartsOption.xSplitLineShow,
-                             lineStyle: {
+                        splitLine: {
+                            show: ctrl.panel.echartsOption.xSplitLineShow,
+                            lineStyle: {
                                 color: ctrl.panel.echartsOption.xAxisLineColor,
                             }
-                             },
+                        },
                         data: getLine()
                     }],
                     yAxis: [{
@@ -350,12 +356,12 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                                 color: ctrl.panel.echartsOption.xAxisLineColor,
                             }
                         },
-                        splitLine:{
-                             show: ctrl.panel.echartsOption.ySplitLineShow,
-                             lineStyle: {
+                        splitLine: {
+                            show: ctrl.panel.echartsOption.ySplitLineShow,
+                            lineStyle: {
                                 color: ctrl.panel.echartsOption.yAxisLineColor,
                             }
-                             },
+                        },
                         // data: getLine()
                     }],
 
@@ -402,10 +408,20 @@ export class EchartsCtrl extends MetricsPanelCtrl {
                     let defaultSeries = [{
                         name: series.name,
                         type: series.type,
-                        barWidth:series.barWidth,
-                        stack:series.stack,
-                        symbol:series.symbol,
-                        symbolSize:series.symbolSize,
+                        barWidth: series.barWidth,
+                        stack: series.stack,
+                        symbol: series.symbol,
+                        symbolSize: series.symbolSize,
+                        label: {
+                            normal: {
+                                show: series.labelShow,
+                                position: series.labelPosition,
+                                formatter: series.labelFormatter
+                            }
+                        },
+                        smooth:series.smooth,
+                        step:series.step,
+                        animation: series.animationShow,
                         data: getDefaultSeriesData(series.name, ctrl.data)
                     }];
                     // // 匹配声明的饼图类型
