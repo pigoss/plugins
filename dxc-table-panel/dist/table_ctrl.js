@@ -128,7 +128,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
         fontSize: '100%',
         sort: { col: 0, desc: true },
         USE_FAKE_DATA: false,
-        fakeData: []
+        fakeData: '[]'
       };
 
       _export('TableCtrl', TableCtrl = function (_MetricsPanelCtrl) {

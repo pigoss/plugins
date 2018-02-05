@@ -40,7 +40,7 @@ const panelDefaults = {
   fontSize: '100%',
   sort: { col: 0, desc: true },
   USE_FAKE_DATA: false,
-  fakeData: [],
+  fakeData: '[]',
 };
 
 export class TableCtrl extends MetricsPanelCtrl {
