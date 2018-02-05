@@ -5,6 +5,8 @@ import './libs/dark'; // eslint-disable-line
 import './css/style.css!'; // eslint-disable-line
 import './libs/bmap.js'; // eslint-disable-line
 import './libs/getBmap.js'; // eslint-disable-line
+import './libs/jiangxi.js'; // eslint-disable-line
+import './libs/nanchangshi.js'; // eslint-disable-line
 export class EchartsMapCtrl extends PanelCtrl { // eslint-disable-line
   constructor($scope, $injector) {
     super($scope, $injector);

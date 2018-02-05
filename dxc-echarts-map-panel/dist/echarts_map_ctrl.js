@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/dark', './css/style.css!', './libs/bmap.js', './libs/getBmap.js'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/dark', './css/style.css!', './libs/bmap.js', './libs/getBmap.js', './libs/jiangxi.js', './libs/nanchangshi.js'], function (_export, _context) {
   "use strict";
 
   var PanelCtrl, _, echarts, _createClass, EchartsMapCtrl;
@@ -42,7 +42,7 @@ System.register(['app/plugins/sdk', 'lodash', './libs/echarts.min', './libs/dark
       _ = _lodash.default;
     }, function (_libsEchartsMin) {
       echarts = _libsEchartsMin.default;
-    }, function (_libsDark) {}, function (_cssStyleCss) {}, function (_libsBmapJs) {}, function (_libsGetBmapJs) {}],
+    }, function (_libsDark) {}, function (_cssStyleCss) {}, function (_libsBmapJs) {}, function (_libsGetBmapJs) {}, function (_libsJiangxiJs) {}, function (_libsNanchangshiJs) {}],
     execute: function () {
       _createClass = function () {
         function defineProperties(target, props) {
