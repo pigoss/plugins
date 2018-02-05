@@ -1,12 +1,12 @@
 .dxc-table.table-panel-container {
-    padding-top: 2.6em;
     text-align: center;
 }
 
 .dxc-table .table-panel-header-bg {
     margin: 0 8px;
     padding: 0 12px;
-    height: 2.6em;
+    height: 2.2em;
+    line-height: 2.2em;
     border: none;
     background: #333;
     border-radius: 20px;

@@ -39,6 +39,8 @@ const panelDefaults = {
   scroll: true,
   fontSize: '100%',
   sort: { col: 0, desc: true },
+  USE_FAKE_DATA: false,
+  fakeData: [],
 };
 
 export class TableCtrl extends MetricsPanelCtrl {
@@ -92,9 +94,9 @@ export class TableCtrl extends MetricsPanelCtrl {
   }
 
   onDataReceived(dataList) {
-    this.dataRaw = dataList;
+    this.dataRaw = this.panel.USE_FAKE_DATA ? JSON.parse(this.panel.fakeData) : dataList;
+    console.log(this.panel.USE_FAKE_DATA, this.dataRow, JSON.parse(this.panel.fakeData));
     this.pageIndex = 0;
-console.log(dataList);
     // automatically correct transform mode based on data
     if (this.dataRaw && this.dataRaw.length) {
       if (this.dataRaw[0].type === 'table') {
